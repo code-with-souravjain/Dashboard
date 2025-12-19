@@ -3,15 +3,17 @@ import { useParams } from 'react-router-dom'
 import Inbox from '../Inbox/Inbox'
 import Allreports from '../reports/Allreports'
 import Settings from '../settings/Settings'
-import HomeDash from '../homedash/HomeDash'
-import UserProfile from '../../user/UserProfile'
+import Home from '../homedash/Home'
+import UserProfile from '../../pages/user/UserProfile'
+import Demopage from "../../pages/demo/Demopage"
 
 const pageMap = {
-  homedash: <HomeDash />,
+  home: <Home />,
   inbox: <Inbox />,
   reports: <Allreports />,
   settings: <Settings />,
-  userprofile: <UserProfile/>
+  userprofile: <UserProfile/>,
+  demopage: <Demopage/>
 }
 
 const PageRender = () => {

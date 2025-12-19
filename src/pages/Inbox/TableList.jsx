@@ -1,6 +1,7 @@
 import React from "react";
 import ExpandableText from "../../components/ExpandableText";
-import { Delete, EditBtn, ViewBtn } from "../../utilities/Button";
+// import { Delete, EditBtn, ViewBtn } from "../../utilities/Button";
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const TableList = ({ students }) => {
   return (
@@ -51,10 +52,14 @@ const TableList = ({ students }) => {
                 </span>
               </td>
 
-              <td className="p-1 flex gap-1">
+              {/* <td className="p-1 flex gap-1">
                 <EditBtn />
                 <ViewBtn />
                 <Delete />
+              </td> */}
+              <td>
+                <MoreVertIcon/>
+                heello
               </td>
             </tr>
           ))}

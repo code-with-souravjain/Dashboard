@@ -1,7 +1,7 @@
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Icons from "../utilities/Icons";
-import { ProfileEditBtn } from "../utilities/Button";
+import Icons from "../../utilities/Icons";
+import { ProfileEditBtn } from "../../utilities/Button";
 
 
 const UserProfile = () => {

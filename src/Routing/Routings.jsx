@@ -1,24 +1,23 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Master from "../master/Master";
-import HomeDash from "../pages/homedash/HomeDash";
+import Home from "../pages/homedash/Home";
 import PageRender from "../pages/main/PageRender";
 import Login from "../pages/login/Login";
 
 const Routings = () => {
   return (
     <Routes>
-      {/* PUBLIC ROUTE */}
-      <Route path="/login" element={<Login />} />
 
-      {/* DASHBOARD LAYOUT */}
-      <Route path="/" element={<Master />}>
-        {/* Default route */}
-        <Route index element={<HomeDash />} />
+      {/* PUBLIC */}
+      <Route path="/admin/login" element={<Login />} />
 
-        {/* Dynamic pages */}
+      {/* ADMIN DASHBOARD */}
+      <Route path="/admin" element={<Master />}>
+        <Route index element={<Home />} />
         <Route path=":name" element={<PageRender />} />
       </Route>
+
     </Routes>
   );
 };

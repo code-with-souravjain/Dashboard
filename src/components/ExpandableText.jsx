@@ -4,8 +4,7 @@ const ExpandableText = ({ text, width = "200px" }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div style={{ maxWidth: width, position: "relative" }}>
-      
+    <div style={{ maxWidth: width }}>
       {/* SHORT TEXT */}
       <div
         onClick={() => setOpen(!open)}
@@ -15,26 +14,23 @@ const ExpandableText = ({ text, width = "200px" }) => {
           overflow: "hidden",
           textOverflow: "ellipsis",
         }}
-        title={text}
+        title={text}   // ✅ HOVER par full name
       >
         {text}
       </div>
 
-      {/* EXPANDED BOX */}
+      {/* EXPAND BELOW */}
       {open && (
         <div
-          className="absolute z-50 mt-1 bg-white shadow-lg rounded-md p-3 text-sm text-gray-700"
+          className="mt-2 bg-gray-50 border border-gray-200 rounded-md p-2 text-sm text-gray-700"
           style={{
-            width: width,
-            maxHeight: "120px",
-            overflowY: "auto",
-            border: "1px solid #e5e7eb",
+            maxWidth: width,
+            wordBreak: "break-word",
           }}
         >
           {text}
 
-          {/* CLOSE */}
-          <div className="text-right mt-2">
+          <div className="text-right mt-1">
             <button
               onClick={() => setOpen(false)}
               className="text-blue-600 text-xs hover:underline"

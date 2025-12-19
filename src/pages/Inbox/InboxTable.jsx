@@ -74,7 +74,7 @@ const InboxTable = () => {
       <div className="overflow-x-auto max-w-full">
         <table className="min-w-full bg-white shadow-lg">
           <thead className="bg-zinc-800 text-white text-sm">
-            <tr>
+            <tr className="text-left">
               <th className="p-3">SNo.</th>
               <th className="p-3">UserName</th>
               <th className="p-3">

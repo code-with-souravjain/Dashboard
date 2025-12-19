@@ -5,7 +5,7 @@ import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import CountUp from "react-countup";
 
-const HomeDash = () => {
+const Home = () => {
   
   const dashboardStats = [
     {
@@ -63,4 +63,4 @@ const HomeDash = () => {
   );
 };
 
-export default HomeDash;
+export default Home;
