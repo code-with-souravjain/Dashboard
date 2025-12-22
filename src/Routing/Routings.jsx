@@ -4,11 +4,11 @@ import Master from "../master/Master";
 import Home from "../pages/homedash/Home";
 import PageRender from "../pages/main/PageRender";
 import Login from "../pages/login/Login";
+import UserDetails from "../pages/userdetailpage/UserDetails";
 
 const Routings = () => {
   return (
     <Routes>
-
       {/* PUBLIC */}
       <Route path="/admin/login" element={<Login />} />
 
@@ -16,8 +16,8 @@ const Routings = () => {
       <Route path="/admin" element={<Master />}>
         <Route index element={<Home />} />
         <Route path=":name" element={<PageRender />} />
+        <Route path="user/:id" element={<UserDetails />} />
       </Route>
-
     </Routes>
   );
 };

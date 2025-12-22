@@ -27,8 +27,8 @@ export const DownloadBtn = ({ Download }) => {
 
 export const ViewBtn = () => {
   return (
-    <button className="cursor-pointer px-3 hover:text-blue-400">
-      <VisibilityIcon />
+    <button className="cursor-pointer hover:text-blue-400">
+      View
     </button>
   );
 };
@@ -36,7 +36,7 @@ export const ViewBtn = () => {
 export const EditBtn = () => {
   return (
     <button className="cursor-pointer hover:text-yellow-600 sm:text-sm md:text-base">
-      <EditIcon />
+      Edit
     </button>
   );
 };
@@ -44,7 +44,7 @@ export const EditBtn = () => {
 export const Delete = () => {
   return (
     <button className="cursor-pointer hover:text-red-700">
-      <DeleteForeverIcon />
+      Delete
     </button>
   );
 };

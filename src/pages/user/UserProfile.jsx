@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Icons from "../../utilities/Icons";
 import { ProfileEditBtn } from "../../utilities/Button";
 
-
 const UserProfile = () => {
+  // const [profilePhoto, setProfilePhoto] = useState(null);
+
+  // const handlePhotoChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setProfilePhoto(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
   const user = {
     firstName: "Sourav",
     lastName: "Jain",
@@ -28,8 +40,19 @@ const UserProfile = () => {
       {/* PROFILE HEADER */}
       <div className="bg-white rounded-2xl border p-6 flex justify-between items-center mb-6">
         <div className="flex items-center gap-4">
-          <div className="p-4 border rounded-full">
-            <AccountCircleIcon fontSize="large" />
+          <div className="relative">
+            <div className="w-20 h-20 border rounded-full overflow-hidden flex items-center justify-center">
+                <AccountCircleIcon fontSize="large" />
+
+            </div>
+            {/* File input overlay */}
+            <input
+              type="file"
+              accept="image/*"
+              // onChange={handlePhotoChange}
+              className="absolute inset-0 opacity-0 cursor-pointer w-20 h-20 rounded-full"
+              title="Upload Photo"
+            />
           </div>
 
           <div>
@@ -49,7 +72,7 @@ const UserProfile = () => {
             linkedin={user.linkedin}
             whatsapp={user.whatsapp}
           />
-          <ProfileEditBtn/>
+          <ProfileEditBtn />
         </div>
       </div>
 
@@ -57,7 +80,7 @@ const UserProfile = () => {
       <div className="bg-white rounded-2xl border p-6 mb-6">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold">Personal Information</h3>
-           <ProfileEditBtn/>
+          <ProfileEditBtn />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
@@ -92,8 +115,7 @@ const UserProfile = () => {
       <div className="bg-white rounded-2xl border p-6">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold">Address</h3>
-          
-          <ProfileEditBtn/>
+          <ProfileEditBtn />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
