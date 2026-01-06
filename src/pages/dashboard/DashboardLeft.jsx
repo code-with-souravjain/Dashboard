@@ -9,6 +9,12 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import SettingsIcon from "@mui/icons-material/Settings";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import GroupsIcon from "@mui/icons-material/Groups";
+import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+
+import LogoutPopup from "../../components/LogoutPopup";
 
 export default function DashboardLeft({
   sidebarOpen,
@@ -18,72 +24,31 @@ export default function DashboardLeft({
   activeItem,
   setActiveItem,
 }) {
-  const menuItems = [
-    {
-      label: "HomeDash",
-      icon: <DashboardCustomizeIcon />,
-      path: "/admin",
-      key: "home",
-    },
-    {
-      label: "Inbox",
-      icon: <InboxIcon />,
-      path: "/admin/inbox",
-      key: "inbox",
-    },
-    {
-      label: "All Reports",
-      icon: <TextSnippetIcon />,
-      path: "/admin/reports",
-      key: "reports",
-    },
-    {
-      label: "Settings",
-      icon: <SettingsIcon />,
-      path: "/admin/settings",
-      key: "settings",
-    },
-    {
-      label: "User Profile",
-      icon: <AccountCircleIcon />,
-      path: "/admin/userprofile",
-      key: "userprofile",
-    },
-    {
-      label: "Demo Page",
-      icon: "🔍",
-      path: "/admin/demopage",
-      key: "demopage",
-    },
-  ];
-
   const [exit, setExit] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogoutClick = () => {
-    setExit(true);
-  };
-
-  const handleCancel = () => {
-    setExit(false);
-  };
-
+  const handleLogoutClick = () => setExit(true);
+  const handleCancel = () => setExit(false);
   const handleConfirmLogout = () => {
     setExit(false);
     navigate("/admin/login");
   };
 
+  const [openDropdown, setOpenDropdown] = useState(false);
+
   return (
     <>
       {/* ================= DESKTOP SIDEBAR ================= */}
       <div
-        className={`hidden md:block bg-white shadow-sm transition-all duration-300 ${
+        className={`hidden md:block bg-white shadow-sm transition-all mt-5 rounded-t-lg duration-300 overflow-y-scroll ${
           sidebarOpen ? "w-64" : "w-20"
         }`}
       >
         <div className="flex items-center justify-between p-4 border-b">
           {sidebarOpen && (
-            <h1 className="text-xl font-bold text-gray-800">Dashboard</h1>
+            <h1 className="text-xl font-bold text-gray-800 lg:ms-2">
+              Dashboard
+            </h1>
           )}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -94,28 +59,172 @@ export default function DashboardLeft({
         </div>
 
         <ul className="p-3">
-          {menuItems.map((item) => (
-            <Link to={item.path} key={item.key}>
-              <button
-                onClick={() => setActiveItem(item.key)}
-                className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
-                  activeItem === item.key
-                    ? "bg-blue-50 text-blue-600"
-                    : "text-gray-700 hover:bg-gray-100"
-                } ${sidebarOpen ? "" : "justify-center"}`}
-              >
-                {item.icon}
-                {sidebarOpen && <span>{item.label}</span>}
-              </button>
-            </Link>
-          ))}
+          {/* Home Dash */}
+          <Link to="/admin">
+            <button
+              onClick={() => setActiveItem("home")}
+              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                activeItem === "home"
+                  ? "bg-[#249b56] text-white"
+                  : "text-gray-700 hover:bg-gray-100"
+              } ${sidebarOpen ? "" : "justify-center"}`}
+            >
+              <DashboardCustomizeIcon />
+              {sidebarOpen && <span>HomeDash</span>}
+            </button>
+          </Link>
+
+          {/* Inbox */}
+          <Link to="/admin/inbox">
+            <button
+              onClick={() => setActiveItem("inbox")}
+              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                activeItem === "inbox"
+                  ? "bg-[#249b56] text-white"
+                  : "text-gray-700 hover:bg-gray-100"
+              } ${sidebarOpen ? "" : "justify-center"}`}
+            >
+              <InboxIcon />
+              {sidebarOpen && <span>Inbox</span>}
+            </button>
+          </Link>
+
+          {/* All Reports */}
+          <Link to="/admin/reports">
+            <button
+              onClick={() => setActiveItem("reports")}
+              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                activeItem === "reports"
+                  ? "bg-[#249b56] text-white"
+                  : "text-gray-700 hover:bg-gray-100"
+              } ${sidebarOpen ? "" : "justify-center"}`}
+            >
+              <TextSnippetIcon />
+              {sidebarOpen && <span>All Reports</span>}
+            </button>
+          </Link>
+
+          {/* Settings */}
+          <Link to="/admin/settings">
+            <button
+              onClick={() => setActiveItem("settings")}
+              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                activeItem === "settings"
+                  ? "bg-[#249b56] text-white"
+                  : "text-gray-700 hover:bg-gray-100"
+              } ${sidebarOpen ? "" : "justify-center"}`}
+            >
+              <SettingsIcon />
+              {sidebarOpen && <span>Settings</span>}
+            </button>
+          </Link>
+
+          {/* User Profile */}
+          <Link to="/admin/userprofile">
+            <button
+              onClick={() => setActiveItem("userprofile")}
+              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                activeItem === "userprofile"
+                  ? "bg-[#249b56] text-white"
+                  : "text-gray-700 hover:bg-gray-100"
+              } ${sidebarOpen ? "" : "justify-center"}`}
+            >
+              <AccountCircleIcon />
+              {sidebarOpen && <span>User Profile</span>}
+            </button>
+          </Link>
+
+          {/* Our Team */}
+          <Link to="/admin/teams">
+            <button
+              onClick={() => setActiveItem("teams")}
+              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                activeItem === "teams"
+                  ? "bg-[#249b56] text-white"
+                  : "text-gray-700 hover:bg-gray-100"
+              } ${sidebarOpen ? "" : "justify-center"}`}
+            >
+              <GroupsIcon />
+              {sidebarOpen && <span>Our Team</span>}
+            </button>
+          </Link>
+
+          {/* Support */}
+
+          <div>
+            <button
+              onClick={() => setOpenDropdown(!openDropdown)}
+              className={`w-full flex items-center justify-between items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                activeItem === "support" ||
+                ["faq", "general", "tickets"].includes(activeItem)
+                  ? "bg-[#249b56] text-white"
+                  : "text-gray-700 hover:bg-gray-100"
+              } ${sidebarOpen ? "" : "justify-center"}`}
+            >
+              <div className="flex items-center gap-3">
+                <SupportAgentIcon />
+                {sidebarOpen && <span>Support</span>}
+              </div>
+              {sidebarOpen && (
+                <span>
+                  {openDropdown ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                </span>
+              )}
+            </button>
+
+            {openDropdown && sidebarOpen && (
+              <div className="pl-8">
+                <Link to="/admin/support/faq">
+                  <button
+                    onClick={() => setActiveItem("faq")}
+                    className={`w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer ${
+                      activeItem === "faq"
+                        ? "bg-[#249b56] text-white"
+                        : "text-gray-600 hover:bg-gray-100"
+                    }`}
+                  >
+                    FAQ
+                  </button>
+                </Link>
+
+                <Link to="/admin/support/general">
+                  <button
+                    onClick={() => setActiveItem("general")}
+                    className={`w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer ${
+                      activeItem === "general"
+                        ? "bg-[#249b56] text-white"
+                        : "text-gray-600 hover:bg-gray-100"
+                    }`}
+                  >
+                    General Enquiry
+                  </button>
+                </Link>
+
+                <Link to="/admin/support/tickets">
+                  <button
+                    onClick={() => setActiveItem("tickets")}
+                    className={`w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer ${
+                      activeItem === "tickets"
+                        ? "bg-[#249b56] text-white"
+                        : "text-gray-600 hover:bg-gray-100"
+                    }`}
+                  >
+                    Tickets
+                  </button>
+                </Link>
+              </div>
+            )}
+          </div>
+
+          
+
 
           {/* LOGOUT */}
           <button
             onClick={handleLogoutClick}
-            className={`w-full flex items-center gap-3 p-3 rounded-lg cursor-pointer
-             text-gray-700 hover:bg-gray-100
-              ${sidebarOpen ? "" : "justify-center"}`}
+            className={`w-full flex items-center gap-3 p-3 rounded-lg cursor-pointer text-gray-700 hover:bg-gray-100 ${
+              sidebarOpen ? "" : "justify-center"
+            }`}
           >
             <LogoutIcon />
             {sidebarOpen && <span>Logout</span>}
@@ -123,32 +232,11 @@ export default function DashboardLeft({
 
           {/* logout popup */}
           {exit && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 bg-opacity-50">
-              <div className="bg-white rounded-lg p-6 w-96 shadow-lg">
-                <h2 className="text-lg font-semibold mb-4 text-gray-800">
-                  Are you sure you want to logout?
-                </h2>
-
-                <div className="flex justify-end gap-4">
-                  <button
-                    onClick={handleCancel}
-                    className="px-5 py-2 border cursor-pointer rounded-lg text-gray-700 hover:bg-gray-100"
-                  >
-                    Cancel
-                  </button>
-
-                  <button
-                    onClick={handleConfirmLogout}
-                    className="px-5 py-2 rounded-lg cursor-pointer bg-red-600 text-white hover:bg-red-700"
-                  >
-                    Logout
-                  </button>
-                </div>
-              </div>
-            </div>
+            <LogoutPopup
+              onCancel={handleCancel}
+              onConfirm={handleConfirmLogout}
+            />
           )}
-
-          {/* logout popup */}
         </ul>
       </div>
 
@@ -172,35 +260,176 @@ export default function DashboardLeft({
               </button>
             </div>
 
-            <ul className="p-3">
-              {menuItems.map((item) => (
-                <Link to={item.path} key={item.key}>
-                  <button
-                    onClick={() => {
-                      setActiveItem(item.key);
-                      setMobileSidebarOpen(false);
-                    }}
-                    className="w-full flex items-center gap-3 p-3 rounded-lg mb-2 hover:bg-gray-100"
-                  >
-                    {item.icon}
-                    <span>{item.label}</span>
-                  </button>
-                </Link>
-              ))}
-
-              {/* LOGOUT */}
-              <Link to="/admin/login">
+            <ul className="p-3 space-y-1">
+              {/* Home */}
+              <Link to="/admin">
                 <button
                   onClick={() => {
-                    setActiveItem("logout");
+                    setActiveItem("home");
                     setMobileSidebarOpen(false);
                   }}
-                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 text-red-600"
+                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                 >
-                  <LogoutIcon />
-                  <span>Logout</span>
+                  <DashboardCustomizeIcon />
+                  <span>HomeDash</span>
                 </button>
               </Link>
+
+              {/* Inbox */}
+              <Link to="/admin/inbox">
+                <button
+                  onClick={() => {
+                    setActiveItem("inbox");
+                    setMobileSidebarOpen(false);
+                  }}
+                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
+                >
+                  <InboxIcon />
+                  <span>Inbox</span>
+                </button>
+              </Link>
+
+              {/* Reports */}
+              <Link to="/admin/reports">
+                <button
+                  onClick={() => {
+                    setActiveItem("reports");
+                    setMobileSidebarOpen(false);
+                  }}
+                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
+                >
+                  <TextSnippetIcon />
+                  <span>All Reports</span>
+                </button>
+              </Link>
+
+              {/* Settings */}
+              <Link to="/admin/settings">
+                <button
+                  onClick={() => {
+                    setActiveItem("settings");
+                    setMobileSidebarOpen(false);
+                  }}
+                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
+                >
+                  <SettingsIcon />
+                  <span>Settings</span>
+                </button>
+              </Link>
+
+              {/* User Profile */}
+              <Link to="/admin/userprofile">
+                <button
+                  onClick={() => {
+                    setActiveItem("userprofile");
+                    setMobileSidebarOpen(false);
+                  }}
+                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
+                >
+                  <AccountCircleIcon />
+                  <span>User Profile</span>
+                </button>
+              </Link>
+
+              {/* Our Team */}
+              <Link to="/admin/demopage">
+                <button
+                  onClick={() => {
+                    setActiveItem("demopage");
+                    setMobileSidebarOpen(false);
+                  }}
+                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
+                >
+                  <GroupsIcon />
+                  <span>Our Team</span>
+                </button>
+              </Link>
+
+              {/* Support */}
+
+              <div>
+                <button
+                  onClick={() => setOpenDropdown(!openDropdown)}
+                  className={`w-full flex items-center justify-between items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                    activeItem === "support" ||
+                    ["faq", "general", "tickets"].includes(activeItem)
+                      ? "bg-[#249b56] text-white"
+                      : "text-gray-700 hover:bg-gray-100"
+                  } ${sidebarOpen ? "" : "justify-center"}`}
+                >
+                  <div className="flex items-center gap-3">
+                    <SupportAgentIcon />
+                    {sidebarOpen && <span>Support</span>}
+                  </div>
+                  {sidebarOpen && (
+                    <span>
+                      {openDropdown ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                    </span>
+                  )}
+                </button>
+
+                {openDropdown && sidebarOpen && (
+                  <div className="pl-8">
+                    <Link to="/admin/support/faq">
+                      <button
+                        onClick={() => setActiveItem("faq")}
+                        className={`w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer ${
+                          activeItem === "faq"
+                            ? "bg-blue-500 text-white"
+                            : "text-gray-600 hover:bg-gray-100"
+                        }`}
+                      >
+                        FAQ
+                      </button>
+                    </Link>
+
+                    <Link to="/admin/support/general">
+                      <button
+                        onClick={() => setActiveItem("general")}
+                        className={`w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer ${
+                          activeItem === "general"
+                            ? "bg-blue-500 text-white"
+                            : "text-gray-600 hover:bg-gray-100"
+                        }`}
+                      >
+                        General Enquiry
+                      </button>
+                    </Link>
+
+                    <Link to="/admin/support/tickets">
+                      <button
+                        onClick={() => setActiveItem("tickets")}
+                        className={`w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer ${
+                          activeItem === "tickets"
+                            ? "bg-blue-500 text-white"
+                            : "text-gray-600 hover:bg-gray-100"
+                        }`}
+                      >
+                        Tickets
+                      </button>
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Logout */}
+              <button
+                onClick={handleLogoutClick}
+                className={`w-full flex items-center gap-3 p-3 rounded-lg cursor-pointer text-gray-700 hover:bg-gray-100 ${
+                  sidebarOpen ? "" : "justify-center"
+                }`}
+              >
+                <LogoutIcon />
+                {sidebarOpen && <span>Logout</span>}
+              </button>
+
+              {/* logout popup */}
+              {exit && (
+                <LogoutPopup
+                  onCancel={handleCancel}
+                  onConfirm={handleConfirmLogout}
+                />
+              )}
             </ul>
           </div>
         </div>

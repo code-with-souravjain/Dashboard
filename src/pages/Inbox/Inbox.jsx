@@ -8,7 +8,6 @@ const Inbox = () => {
   return (
     <div>
   
-      {/* tableform */}
       <InboxTable/>
 
     

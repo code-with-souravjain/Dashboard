@@ -4,60 +4,85 @@ import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import CountUp from "react-countup";
+import BarData from "../../bardata/BarData";
+import PieData from "../../bardata/PieData";
 
 const Home = () => {
-  
   const dashboardStats = [
     {
       id: 1,
       title: "Total Users",
       count: 25,
-      icon: <PeopleIcon style={{ fontSize: 70, color: "#1976d2" }} />,
+      icon: <PeopleIcon style={{ fontSize: 40, color: "#4ec37f" }} />, 
     },
     {
       id: 2,
       title: "Pending Users",
       count: 3,
-      icon: <PersonRemoveIcon style={{ fontSize: 70, color: "#1976d2" }} />,
+      icon: <PersonRemoveIcon style={{ fontSize: 40, color: "#4ec37f" }} />,
     },
     {
       id: 3,
       title: "Ongoing Tasks",
       count: 7,
       icon: (
-        <FormatListNumberedIcon style={{ fontSize: 70, color: "#1976d2" }} />
+        <FormatListNumberedIcon style={{ fontSize: 40, color: "#4ec37f" }} />
       ),
     },
     {
       id: 4,
       title: "Pending Tasks",
       count: 3,
-      icon: <PendingActionsIcon style={{ fontSize: 70, color: "#1976d2" }} />,
+      icon: <PendingActionsIcon style={{ fontSize: 40, color: "#4ec37f" }} />,
     },
   ];
 
   return (
-    <div className="p-4 md:p-6  w-full mx-auto">
-      <h1 className="text-lg md:text-2xl font-medium mb-6">
-        Welcome to the Home Dashboard
+    <div className="px-1 md:px-5 h-auto  mx-auto">
+      <h1 className="text-xl md:text-2xl font-semibold mb-6">
+        Welcome Admin....
       </h1>
 
-      {/* Responsive Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-9">
+      {/* Dashboard cards grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-5">
         {dashboardStats.map((elem) => (
           <div
             key={elem.id}
-            className="bg-[#efefef] rounded-xl p-5 shadow hover:shadow-lg transition-all duration-300 text-center flex flex-col items-center cursor-pointer"
+            className="
+    rounded-xl p-4 text-center flex flex-col items-center cursor-pointer
+    bg-gradient-to-br from-green-500/30 via-white to-green-600/50
+    shadow transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
           >
             <span>{elem.icon}</span>
 
-            <h2 className="text-3xl md:text-4xl font-bold my-4">
+            <h2 className="text-2xl md:text-3xl font-bold my-2">
               <CountUp end={elem.count} />
             </h2>
 
-            <h3 className="text-lg font-medium">{elem.title}</h3>
+            <h3 className="text-md md:text-lg font-medium">{elem.title}</h3>
           </div>
         ))}
+      </div>
+
+      {/* Chart container */}
+      <div className="w-full mt-15">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left Chart Box */}
+          <div className="border-b-4 border-green-900 rounded-xl shadow p-4">
+            <h3 className="text-lg font-semibold mb-6 text-gray-700">
+              Monthly Sales
+            </h3>
+            <BarData />
+          </div>
+
+          {/* Right Pie Chart Box */}
+          <div className="border-b-4 border-indigo-500 rounded-xl shadow p-4">
+            <h3 className="text-lg font-semibold mb-6 text-gray-700">
+              Units Sold
+            </h3>
+            <PieData />
+          </div>
+        </div>
       </div>
     </div>
   );

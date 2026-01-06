@@ -1,46 +1,56 @@
 import React, { useState } from "react";
 
-const ExpandableText = ({ text, width = "200px" }) => {
+const ExpandableText = ({ text, width = "400px", limit }) => {
   const [open, setOpen] = useState(false);
 
+  // Check if text should truncate
+  const isTruncated = text.length > limit;
+
   return (
-    <div style={{ maxWidth: width }}>
+    <>
       {/* SHORT TEXT */}
       <div
-        onClick={() => setOpen(!open)}
-        className="cursor-pointer text-gray-800"
+        onClick={() => isTruncated && setOpen(true)}
+        className={`text-gray-800 ${
+          isTruncated ? "cursor-pointer" : "cursor-default"
+        }`}
         style={{
+          maxWidth: width,
           whiteSpace: "nowrap",
           overflow: "hidden",
           textOverflow: "ellipsis",
         }}
-        title={text}   // ✅ HOVER par full name
+        title={isTruncated ? "Click to view full text" : ""}
       >
         {text}
       </div>
 
-      {/* EXPAND BELOW */}
+      {/* POPUP */}
       {open && (
         <div
-          className="mt-2 bg-gray-50 border border-gray-200 rounded-md p-2 text-sm text-gray-700"
-          style={{
-            maxWidth: width,
-            wordBreak: "break-word",
-          }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/30"
+          onClick={() => setOpen(false)} // outside click
         >
-          {text}
+          <div
+            className="bg-white rounded-md shadow-lg px-4 py-3 max-w-sm"
+            onClick={(e) => e.stopPropagation()} // prevent close on inner click
+          >
+            <div className="flex justify-between items-start gap-3">
+              <div className="text-gray-800 break-words">
+                {text}
+              </div>
 
-          <div className="text-right mt-1">
-            <button
-              onClick={() => setOpen(false)}
-              className="text-blue-600 text-xs hover:underline"
-            >
-              Close
-            </button>
+              <button
+                onClick={() => setOpen(false)}
+                className="text-red-500  font-semibold hover:text-gray-700 cursor-pointer "
+              >
+                ✕
+              </button>
+            </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

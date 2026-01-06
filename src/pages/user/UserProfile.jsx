@@ -38,41 +38,58 @@ const UserProfile = () => {
       <h1 className="text-lg md:text-2xl font-semibold mb-6">Profile</h1>
 
       {/* PROFILE HEADER */}
-      <div className="bg-white rounded-2xl border p-6 flex justify-between items-center mb-6">
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <div className="w-20 h-20 border rounded-full overflow-hidden flex items-center justify-center">
+      <div className="bg-white rounded-2xl border p-6 mb-6">
+        <div
+          className="flex flex-col gap-6 
+                  sm:flex-row sm:items-center sm:justify-between"
+        >
+          {/* LEFT SIDE */}
+          <div
+            className="flex flex-col items-center text-center gap-4
+                    sm:flex-row sm:items-center sm:text-left"
+          >
+            {/* PROFILE IMAGE */}
+            <div className="relative">
+              <div
+                className="w-20 h-20 border rounded-full overflow-hidden 
+                        flex items-center justify-center"
+              >
                 <AccountCircleIcon fontSize="large" />
+              </div>
 
+              {/* File input overlay */}
+              <input
+                type="file"
+                accept="image/*"
+                className="absolute inset-0 opacity-0 cursor-pointer 
+                     w-20 h-20 rounded-full"
+                title="Upload Photo"
+              />
             </div>
-            {/* File input overlay */}
-            <input
-              type="file"
-              accept="image/*"
-              // onChange={handlePhotoChange}
-              className="absolute inset-0 opacity-0 cursor-pointer w-20 h-20 rounded-full"
-              title="Upload Photo"
+
+            {/* USER INFO */}
+            <div>
+              <h2 className="text-xl font-semibold">
+                {user.firstName} {user.lastName}
+              </h2>
+              <p className="text-sm text-gray-500">
+                {user.role} | {user.location}
+              </p>
+            </div>
+          </div>
+
+          {/* RIGHT SIDE */}
+          <div
+            className="flex flex-wrap items-center justify-center 
+                    gap-5 sm:justify-end"
+          >
+            <Icons
+              instagram={user.instagram}
+              linkedin={user.linkedin}
+              whatsapp={user.whatsapp}
             />
+            <ProfileEditBtn />
           </div>
-
-          <div>
-            <h2 className="text-xl font-semibold">
-              {user.firstName} {user.lastName}
-            </h2>
-            <p className="text-sm text-gray-500">
-              {user.role} | {user.location}
-            </p>
-          </div>
-        </div>
-
-        {/* SOCIAL ICONS */}
-        <div className="flex items-center gap-7">
-          <Icons
-            instagram={user.instagram}
-            linkedin={user.linkedin}
-            whatsapp={user.whatsapp}
-          />
-          <ProfileEditBtn />
         </div>
       </div>
 

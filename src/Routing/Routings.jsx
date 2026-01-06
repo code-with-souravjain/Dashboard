@@ -5,6 +5,10 @@ import Home from "../pages/homedash/Home";
 import PageRender from "../pages/main/PageRender";
 import Login from "../pages/login/Login";
 import UserDetails from "../pages/userdetailpage/UserDetails";
+import ProtectedRouting from "./ProtectedRouting";
+import Faq from "../pages/support/support-dropdown/Faq";
+import GeneralEnquiry from "../pages/support/support-dropdown/GeneralEnquiry";
+import Tickets from "../pages/support/support-dropdown/Tickets";
 
 const Routings = () => {
   return (
@@ -12,10 +16,20 @@ const Routings = () => {
       {/* PUBLIC */}
       <Route path="/admin/login" element={<Login />} />
 
-      {/* ADMIN DASHBOARD */}
-      <Route path="/admin" element={<Master />}>
+      {/* PROTECTED ADMIN ROUTES */}
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRouting>
+            <Master />
+          </ProtectedRouting>
+        }
+      >
         <Route index element={<Home />} />
         <Route path=":name" element={<PageRender />} />
+        <Route path="support/faq" element={<Faq />} />
+        <Route path="support/general" element={<GeneralEnquiry />} />
+        <Route path="support/tickets" element={<Tickets />} />
         <Route path="user/:id" element={<UserDetails />} />
       </Route>
     </Routes>

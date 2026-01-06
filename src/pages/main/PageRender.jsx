@@ -5,7 +5,11 @@ import Allreports from '../reports/Allreports'
 import Settings from '../settings/Settings'
 import Home from '../homedash/Home'
 import UserProfile from '../../pages/user/UserProfile'
-import Demopage from "../../pages/demo/Demopage"
+import Teams from '../team/Teams'
+import Support from "../support/Support"
+import Faq from "../support/support-dropdown/Faq"
+import GeneralEnquiry from "../support/support-dropdown/GeneralEnquiry"
+import Tickets from "../support/support-dropdown/Tickets"
 
 const pageMap = {
   home: <Home />,
@@ -13,7 +17,11 @@ const pageMap = {
   reports: <Allreports />,
   settings: <Settings />,
   userprofile: <UserProfile/>,
-  demopage: <Demopage/>
+  teams: <Teams/>,
+  support: <Support/>,
+  faq: <Faq/>,
+  generalenquiry: <GeneralEnquiry/>,
+  tickets: <Tickets/>,
 }
 
 const PageRender = () => {

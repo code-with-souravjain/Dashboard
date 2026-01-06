@@ -9,7 +9,7 @@ const Button = ({ Btntext, onClick }) => {
     <>
       <button
         onClick={onClick}
-        className="px-5 py-2 bg-red-700 text-white rounded-md cursor-pointer mb-4 text-sm lg:text-md"
+        className="px-5 py-3 bg-[#c10007] text-white rounded-md cursor-pointer mb-4 text-sm lg:text-md"
       >
         {Btntext}
       </button>
@@ -17,9 +17,17 @@ const Button = ({ Btntext, onClick }) => {
   );
 };
 
+export const NormalBtn = ({ normaltext, onClick }) => {
+  return (
+    <button onClick={onClick} className="px-5 py-2 border text-gray-800 rounded-md cursor-pointer mb-4 text-sm lg:text-md">
+      {normaltext}
+    </button>
+  );
+};
+
 export const DownloadBtn = ({ Download }) => {
   return (
-    <button className="px-5 py-2  bg-green-700 text-white rounded-md cursor-pointer mb-4 text-sm lg:text-md">
+    <button className="px-5 py-2  bg-[#008236] text-white rounded-md cursor-pointer mb-4 text-sm lg:text-md">
       {Download}
     </button>
   );

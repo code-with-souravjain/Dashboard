@@ -8,7 +8,7 @@ const Master = () => {
     <>
       <PrimarySearchAppBar />
       <Dashboard />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

@@ -10,7 +10,7 @@
   },
   {
     id: 2,
-    name: "Priya Gosh anfdsjfiofjfsdjkfsdk",
+    name: "Priya Gosh anfdsjfiofjfsdjkfsdkPriya Gosh anfdsjfiofjfsdjkfsdkPriya Gosh anfdsjfiofjfsdjkfsdkPriya Gosh anfdsjfiofjfsdjkfsdkPriya Gosh anfdsjfiofjfsdjkfsdk",
     gender: "Female",
     dob: "01/12/2006",
     phone: "+91 8745671235",
@@ -19,7 +19,7 @@
   },
   {
     id: 3,
-    name: "Shivam Das",
+    name: "Shivam DasShivam Das Shivam DasShivam DasShivam DasShivam DasShivam Das",
     gender: "Male",
     dob: "12/04/2005",
     phone: "+91 8567312908",
@@ -28,7 +28,7 @@
   },
   {
     id: 4,
-    name: "Rohit Sharma",
+    name: "Rohit SharmaSharmaaa",
     gender: "Male",
     dob: "01/10/2006",
     phone: "+91 7654128907",
