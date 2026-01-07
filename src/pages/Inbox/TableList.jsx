@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ExpandableText from "../../components/ExpandableText";
 import { Delete, EditBtn, ViewBtn } from "../../utilities/Button";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useNavigate } from "react-router-dom";
+import { ThemeColorContext } from "../../context/ThemeColorContext";
 
 const TableList = ({ students, genderFilter, setGenderFilter }) => {
   const navigate = useNavigate();
@@ -17,87 +18,115 @@ const TableList = ({ students, genderFilter, setGenderFilter }) => {
     setActiveRow(activeRow === id ? null : id);
   };
 
+  const { color } = useContext(ThemeColorContext);
+
   return (
-   <div className="overflow-x-auto md:overflow-x-hidden">
-  <table className="w-full min-w-max md:min-w-full bg-white shadow-lg border-collapse">
-    <thead className="text-left">
-      <tr>
-        <th className="bg-[#097235] text-white p-2 text-xs md:text-sm">SNo.</th>
-        <th className="bg-[#097235] text-white p-2 text-xs md:text-sm">UserName</th>
-        <th className="bg-[#097235] text-white p-2 text-xs md:text-sm">
-          <select
-            value={genderFilter}
-            onChange={(e) => setGenderFilter(e.target.value)}
-            className="bg-[#097235] border text-white rounded px-1 py-1 focus:outline-none text-xs md:text-sm"
-          >
-            <option value="All">All</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-        </th>
-        <th className="bg-[#097235] text-white p-2 text-xs md:text-sm">DOB</th>
-        <th className="bg-[#097235] text-white p-2 text-xs md:text-sm">Phone</th>
-        <th className="bg-[#097235] text-white p-2 text-xs md:text-sm">Email</th>
-        <th className="bg-[#097235] text-white p-2 text-xs md:text-sm">Status</th>
-        <th className="bg-[#097235] text-white p-2 text-xs md:text-sm">Action</th>
-        
-      </tr>
-    </thead>
-    <tbody>
+    <div className="overflow-x-auto md:overflow-x-hidden">
+      <table className="w-full min-w-max md:min-w-full bg-white shadow-lg border-collapse">
+        <thead className="text-left">
+          <tr>
+            <th
+              style={{ backgroundColor: color }}
+              className="text-white p-2 text-xs md:text-sm"
+            >
+              SNo.
+            </th>
 
-      {students.map((student) => (
-        <tr key={student.id} className="border-b border-gray-200 ">
-          <td className="px-2 py-2 text-xs md:text-sm break-words">{student.id}</td>
-          <td className="px-2 py-2 text-xs md:text-sm break-words">
-            <ExpandableText text={student.name} width="140px" limit={18} />
-          </td>
-          <td className="px-2 py-2 text-xs md:text-sm break-words">{student.gender}</td>
-          <td className="px-2 py-2 text-xs md:text-sm break-words">{student.dob}</td>
-          <td className="px-2 py-2 text-xs md:text-sm break-words">{student.phone}</td>
-          <td className="px-2 py-2 text-xs md:text-sm break-words">
-            <ExpandableText text={student.email} width="160px"  limit={20} />
-          </td>
-          <td className="px-2 py-1 text-xs md:text-sm">
-            <span
-              className={`px-2 py-1 rounded-full text-white text-xs ${
-                student.status === "Active" ? "bg-green-700" : "bg-red-700"
-              }`}
+            <th
+              style={{ backgroundColor: color }}
+              className="text-white p-2 text-xs md:text-sm"
             >
-              {student.status}
-            </span>
-          </td>
-          <td className="px-2 py-1 text-xs md:text-sm text-center relative">
-            <button
-              className="p-1 rounded-full cursor-pointer hover:bg-gray-200 text-gray-800"
-              onClick={() => handleDotPopup(student.id)}
-            >
-              <MoreVertIcon fontSize="small" />
-            </button>
-            {activeRow === student.id && (
-              <div className="absolute right-6 top-8 w-32 bg-white shadow-lg rounded-md z-50">
-                <button className="w-full px-3 py-1 text-left hover:bg-gray-100 text-sm">
-                  <EditBtn />
-                </button>
-                <button
-                  className="w-full px-3 py-1 text-left hover:bg-gray-100 text-sm"
-                  onClick={() => handleView(student.id)}
+              UserName
+            </th>
+
+            <th  style={{ backgroundColor: color }} className=" text-white p-2 text-xs md:text-sm">
+              <select
+                value={genderFilter}
+                onChange={(e) => setGenderFilter(e.target.value)}
+                className=" border text-white rounded px-1 py-1 focus:outline-none text-xs md:text-sm"
+                 style={{ backgroundColor: color }}
+              >
+                <option value="All">All</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </th>
+            <th  style={{ backgroundColor: color }} className=" text-white p-2 text-xs md:text-sm">
+              DOB
+            </th>
+            <th  style={{ backgroundColor: color }} className=" text-white p-2 text-xs md:text-sm">
+              Phone
+            </th>
+            <th  style={{ backgroundColor: color }} className=" text-white p-2 text-xs md:text-sm">
+              Email
+            </th>
+            <th  style={{ backgroundColor: color }} className=" text-white p-2 text-xs md:text-sm">
+              Status
+            </th>
+            <th  style={{ backgroundColor: color }}s className=" text-white p-2 text-xs md:text-sm">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {students.map((student) => (
+            <tr key={student.id} className="border-b border-gray-200 ">
+              <td className="px-2 py-2 text-xs md:text-sm break-words">
+                {student.id}
+              </td>
+              <td className="px-2 py-2 text-xs md:text-sm break-words">
+                <ExpandableText text={student.name} width="140px" limit={18} />
+              </td>
+              <td className="px-2 py-2 text-xs md:text-sm break-words">
+                {student.gender}
+              </td>
+              <td className="px-2 py-2 text-xs md:text-sm break-words">
+                {student.dob}
+              </td>
+              <td className="px-2 py-2 text-xs md:text-sm break-words">
+                {student.phone}
+              </td>
+              <td className="px-2 py-2 text-xs md:text-sm break-words">
+                <ExpandableText text={student.email} width="160px" limit={20} />
+              </td>
+              <td className="px-2 py-1 text-xs md:text-sm">
+                <span
+                  className={`px-2 py-1 rounded-full text-white text-xs ${
+                    student.status === "Active" ? "bg-green-700" : "bg-red-700"
+                  }`}
                 >
-                  <ViewBtn />
+                  {student.status}
+                </span>
+              </td>
+              <td className="px-2 py-1 text-xs md:text-sm text-center relative">
+                <button
+                  className="p-1 rounded-full cursor-pointer hover:bg-gray-200 text-gray-800"
+                  onClick={() => handleDotPopup(student.id)}
+                >
+                  <MoreVertIcon fontSize="small" />
                 </button>
-                <button className="w-full px-3 py-1 text-left hover:bg-gray-100 text-red-600 text-sm">
-                  <Delete />
-                </button>
-              </div>
-            )}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-
-
-</div>
-
+                {activeRow === student.id && (
+                  <div className="absolute right-6 top-8 w-32 bg-white shadow-lg rounded-md z-50">
+                    <button className="w-full px-3 py-1 text-left hover:bg-gray-100 text-sm">
+                      <EditBtn />
+                    </button>
+                    <button
+                      className="w-full px-3 py-1 text-left hover:bg-gray-100 text-sm"
+                      onClick={() => handleView(student.id)}
+                    >
+                      <ViewBtn />
+                    </button>
+                    <button className="w-full px-3 py-1 text-left hover:bg-gray-100 text-red-600 text-sm">
+                      <Delete />
+                    </button>
+                  </div>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

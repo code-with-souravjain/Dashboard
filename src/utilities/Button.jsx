@@ -9,7 +9,7 @@ const Button = ({ Btntext, onClick }) => {
     <>
       <button
         onClick={onClick}
-        className="px-5 py-3 bg-[#c10007] text-white rounded-md cursor-pointer mb-4 text-sm lg:text-md"
+className="px-5 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 hover:shadow-lg transition-all duration-200 mb-4 cursor-pointer text-sm lg:text-md"
       >
         {Btntext}
       </button>

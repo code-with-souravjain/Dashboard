@@ -5,11 +5,25 @@ const FaqForm = ({ onClose, onSubmit }) => {
   const [mytitle, setMytitle] = useState("");
   const [mydescription, setMydescription] = useState("");
 
+  const [errors, setErrors] = useState({});
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-     // if form is empty title and des nahi hia
-    if (!mytitle || !mydescription) return;
+    let newErrors = {};
+
+    if (!mytitle.trim()) {
+      newErrors.title = "Title is required";
+    }
+
+    if (!mydescription.trim()) {
+      newErrors.description = "Description is required";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
     onSubmit({
       title: mytitle,
@@ -18,18 +32,15 @@ const FaqForm = ({ onClose, onSubmit }) => {
 
     setMytitle("");
     setMydescription("");
+    setErrors({});
   };
-
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
       <div className="bg-white w-full max-w-lg rounded-xl shadow-xl">
-        
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b">
-          <h2 className="text-lg font-semibold text-gray-800">
-            Add New FAQ
-          </h2>
+          <h2 className="text-lg font-semibold text-gray-800">Add New FAQ</h2>
           <button
             onClick={onClose}
             className="text-red-500 font-semibold hover:text-red-800 text-xl"
@@ -47,10 +58,19 @@ const FaqForm = ({ onClose, onSubmit }) => {
             <input
               type="text"
               value={mytitle}
-              onChange={(e) => setMytitle(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg"
+              onChange={(e) => {
+                setMytitle(e.target.value);
+                setErrors({ ...errors, title: "" });
+              }}
+              className={`w-full px-4 py-2 border rounded-lg ${
+                errors.title ? "border-red-500" : ""
+              }`}
               placeholder="Enter your FAQ title"
             />
+
+            {errors.title && (
+              <p className="text-red-500 text-sm mt-1">{errors.title}</p>
+            )}
           </div>
 
           <div>
@@ -60,10 +80,19 @@ const FaqForm = ({ onClose, onSubmit }) => {
             <textarea
               rows={6}
               value={mydescription}
-              onChange={(e) => setMydescription(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg resize-none"
+              onChange={(e) => {
+                setMydescription(e.target.value);
+                setErrors({ ...errors, description: "" });
+              }}
+              className={`w-full px-4 py-2 border rounded-lg resize-none ${
+                errors.description ? "border-red-500" : ""
+              }`}
               placeholder="Enter your FAQ description"
             />
+
+            {errors.description && (
+              <p className="text-red-500 text-sm mt-1">{errors.description}</p>
+            )}
           </div>
 
           {/* Actions */}

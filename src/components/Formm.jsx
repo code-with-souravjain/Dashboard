@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import InputFields from "../components/InputFields";
 import CreateIcon from "@mui/icons-material/Create";
 
+
 const initialFormState = {
   name: "",
   lastname: "",
@@ -15,8 +16,14 @@ const initialFormState = {
   role: "",
   image: null,
 };
+import Button, { NormalBtn } from "../utilities/Button"
 
-const roles = ["Admin", "Sub Admin", "Vendor", "Editor", "User"]; 
+
+const roles = ["Admin", "Sub Admin", "Vendor", "Editor", "User"];
+
+const allInterests = ["Sports", "Music", "Travel", "Reading"];
+
+const Allgenders = ["Male", "Female", "Other"]
 
 const Formm = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -51,7 +58,7 @@ const Formm = ({ isOpen, onClose }) => {
     setOpen(false);
     setErrors({ ...errors, role: "" });
   };
-  
+
   // Validation function
   const validate = () => {
     const newErrors = {};
@@ -107,6 +114,7 @@ const Formm = ({ isOpen, onClose }) => {
     console.log(formData);
     onClose();
   };
+  
 
   return (
     <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center px-4">
@@ -135,7 +143,7 @@ const Formm = ({ isOpen, onClose }) => {
             onChange={handleChange}
             error={errors.name}
             maxLength={20}
-          /> 
+          />
 
           <InputFields
             label="Last Name"
@@ -143,7 +151,7 @@ const Formm = ({ isOpen, onClose }) => {
             value={formData.lastname}
             onChange={handleChange}
             error={errors.lastname}
-            maxLength={20} 
+            maxLength={20}
           />
           <InputFields
             label="Email"
@@ -179,11 +187,10 @@ const Formm = ({ isOpen, onClose }) => {
           <div className="md:col-span-2">
             <label className="text-sm font-medium text-gray-700">Address</label>
             <textarea
-             
               name="address"
               value={formData.address}
               onChange={handleChange}
-              className="w-full border rounded-lg px-3 py-2 text-sm"
+              className="w-full border border-gray-400 rounded-lg px-3 py-2 text-sm"
             />
             {errors.address && (
               <p className="text-xs text-red-500">{errors.address}</p>
@@ -201,7 +208,7 @@ const Formm = ({ isOpen, onClose }) => {
                 name="country"
                 value={formData.country}
                 onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 text-sm"
+                className="w-full border border-gray-400 rounded-lg px-3 py-2 text-sm"
               />
               {errors.country && (
                 <p className="text-xs text-red-500 mt-1">{errors.country}</p>
@@ -219,10 +226,10 @@ const Formm = ({ isOpen, onClose }) => {
                 }}
                 onClick={() => setOpen(true)}
                 placeholder="Select role"
-                className="w-full border rounded-lg px-3 py-2 text-sm"
+                className="w-full border border-gray-400 rounded-lg px-3 py-2 text-sm"
               />
               {open && (
-                <ul className="absolute w-full bg-white border rounded-lg shadow mt-1 z-20 max-h-40 overflow-y-auto">
+                <ul className="absolute w-full bg-white border border-gray-400 rounded-lg shadow mt-1 z-20 max-h-40 overflow-y-auto">
                   {filteredRoles.map((r) => (
                     <li
                       key={r}
@@ -246,7 +253,7 @@ const Formm = ({ isOpen, onClose }) => {
             <div className="flex-1 rounded-lg p-4">
               <p className="text-sm font-medium text-gray-700 mb-2">Gender</p>
               <div className="flex gap-6 text-sm">
-                {["Male", "Female", "Other"].map((g) => (
+                {Allgenders.map((g) => (
                   <label key={g} className="flex items-center gap-2">
                     <input
                       type="radio"
@@ -266,39 +273,74 @@ const Formm = ({ isOpen, onClose }) => {
 
               {/* CHECKBOX OPTIONS */}
               <div className="md:col-span-2 mt-4">
-                <p className="text-sm font-medium text-gray-700 mb-2">
-                  Interests
-                </p>
-                <div className="flex gap-6 text-sm flex-wrap">
-                  {["Sports", "Music", "Travel", "Reading"].map((interest) => (
-                    <label key={interest} className="flex items-center gap-2">
+             
+                <div className="md:col-span-2 mt-4">
+                  <p className="text-sm font-medium text-gray-700 mb-2">
+                    Interests
+                  </p>
+
+                  <div className="flex gap-6 text-sm flex-wrap">
+                    {/* Select All */}
+                    <label className="flex items-center gap-2 font-normal">
                       <input
                         type="checkbox"
-                        name="interests"
-                        className="w-3 h-3 mt-0.5 flex-shrink-0"
-                        value={interest}
+                        className="w-3 h-3"
                         checked={
-                          formData.interests?.includes(interest) || false
+                          formData.interests?.length === allInterests.length
                         }
                         onChange={(e) => {
-                          const { checked, value } = e.target;
-                          let updatedInterests = formData.interests || [];
-                          if (checked) {
-                            updatedInterests.push(value);
+                          if (e.target.checked) {
+                            setFormData({
+                              ...formData,
+                              interests: allInterests,
+                            });
                           } else {
-                            updatedInterests = updatedInterests.filter(
-                              (i) => i !== value
-                            );
+                            setFormData({ ...formData, interests: [] });
                           }
-                          setFormData({
-                            ...formData,
-                            interests: updatedInterests,
-                          });
                         }}
                       />
-                      {interest}
+                       All
                     </label>
-                  ))}
+
+                    {/* Individual interests */}
+                    {allInterests.map((interest) => (
+                      <label
+                        key={interest}
+                        className="flex items-center gap-2 font-normal"
+                      >
+                        <input
+                          type="checkbox"
+                          className="w-3 h-3"
+                          value={interest}
+                          checked={
+                            formData.interests?.includes(interest) || false
+                          }
+                          onChange={(e) => {
+                            const { checked, value } = e.target;
+                            let updatedInterests = formData.interests || [];
+                            if (checked) {
+                              updatedInterests.push(value);
+                            } else {
+                              updatedInterests = updatedInterests.filter(
+                                (i) => i !== value
+                              );
+                            }
+                            setFormData({
+                              ...formData,
+                              interests: updatedInterests,
+                            });
+                          }}
+                        />
+                        {interest}
+                      </label>
+                    ))}
+                  </div>
+
+                  {errors.interests && (
+                    <p className="text-xs text-red-500 mt-1">
+                      {errors.interests}
+                    </p>
+                  )}
                 </div>
               </div>
               {errors.interests && (
@@ -307,14 +349,14 @@ const Formm = ({ isOpen, onClose }) => {
             </div>
 
             {/* PROFILE IMAGE */}
-            <div className="flex-1 border rounded-lg p-4 flex flex-col items-center justify-center">
+            <div className="flex-1 border border-gray-400 rounded-lg p-4 flex flex-col items-center justify-center">
               {!preview ? (
                 <div
                   onClick={() => document.getElementById("imageUpload").click()}
-                  className="border-2 border-dashed border-blue-400 rounded-xl p-6 text-center cursor-pointer bg-purple-50 hover:bg-purple-100 transition w-full"
+                  className="border-2 border-dashed border-[#249b56] rounded-xl p-6 text-center cursor-pointer bg-[#c3f7d9] transition w-full"
                 >
                   <div className="flex flex-col items-center gap-3">
-                    <div className="bg-blue-600 text-white p-4 rounded-full">
+                    <div className="bg-[#249b56] text-white p-4 rounded-full">
                       ⬆️
                     </div>
                     <p className="text-blue-700 font-semibold">
@@ -357,20 +399,10 @@ const Formm = ({ isOpen, onClose }) => {
           </div>
 
           {/* FOOTER */}
-          <div className="md:col-span-2 flex justify-end gap-3 pt-4 border-t">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 text-sm border rounded-lg text-gray-600 hover:bg-gray-100"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-5 py-2 text-sm rounded-lg bg-blue-600 text-white hover:bg-blue-700"
-            >
-              Save
-            </button>
+          <div className="md:col-span-2 flex justify-end gap-3  ">
+
+            <NormalBtn normaltext="Cancel" onClick={onClose} />
+            <Button Btntext="Add Member" />
           </div>
         </form>
       </div>

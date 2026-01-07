@@ -9,7 +9,7 @@ const InputFields = ({ label, name, value, onChange, type, error, maxLength }) =
         name={name}
         value={value}
         onChange={onChange}
-        className={`w-full border rounded-lg px-3 py-2 text-sm ${
+        className={`w-full border border-gray-400 rounded-lg px-3 py-2 text-sm ${
           error && "border-red-500 focus:ring-red-500"}`}
         maxLength={maxLength} 
       />

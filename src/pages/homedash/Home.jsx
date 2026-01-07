@@ -6,34 +6,36 @@ import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import CountUp from "react-countup";
 import BarData from "../../bardata/BarData";
 import PieData from "../../bardata/PieData";
+import { useContext } from "react";
+import { ThemeColorContext } from "../../context/ThemeColorContext";
 
 const Home = () => {
+  const { color } = useContext(ThemeColorContext);
+
   const dashboardStats = [
     {
       id: 1,
       title: "Total Users",
       count: 25,
-      icon: <PeopleIcon style={{ fontSize: 40, color: "#4ec37f" }} />, 
+      icon: <PeopleIcon style={{ fontSize: 40, color: color }} />,
     },
     {
       id: 2,
       title: "Pending Users",
       count: 3,
-      icon: <PersonRemoveIcon style={{ fontSize: 40, color: "#4ec37f" }} />,
+      icon: <PersonRemoveIcon style={{ fontSize: 40, color: color }} />,
     },
     {
       id: 3,
       title: "Ongoing Tasks",
       count: 7,
-      icon: (
-        <FormatListNumberedIcon style={{ fontSize: 40, color: "#4ec37f" }} />
-      ),
+      icon: <FormatListNumberedIcon style={{ fontSize: 40, color: color }} />,
     },
     {
       id: 4,
       title: "Pending Tasks",
       count: 3,
-      icon: <PendingActionsIcon style={{ fontSize: 40, color: "#4ec37f" }} />,
+      icon: <PendingActionsIcon style={{ fontSize: 40, color: color }} />,
     },
   ];
 
@@ -48,17 +50,15 @@ const Home = () => {
         {dashboardStats.map((elem) => (
           <div
             key={elem.id}
-            className="
-    rounded-xl p-4 text-center flex flex-col items-center cursor-pointer
-    bg-gradient-to-br from-green-500/30 via-white to-green-600/50
-    shadow transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+            className="rounded-xl p-4 text-center flex flex-col items-center cursor-pointer shadow transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+            style={{
+              background: `linear-gradient(to bottom right, ${color}30, white, ${color}50)`,
+            }}
           >
             <span>{elem.icon}</span>
-
             <h2 className="text-2xl md:text-3xl font-bold my-2">
               <CountUp end={elem.count} />
             </h2>
-
             <h3 className="text-md md:text-lg font-medium">{elem.title}</h3>
           </div>
         ))}

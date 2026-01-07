@@ -70,7 +70,7 @@ const TeamForm = ({ isOpen, onClose, onSubmit }) => {
           Add New Member
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4"> 
           {/* Image Upload */}
           <div>
             <label className="block text-sm font-medium mb-2">Image</label>
@@ -81,11 +81,11 @@ const TeamForm = ({ isOpen, onClose, onSubmit }) => {
                 ${
                   errors.image
                     ? "border-red-500 bg-red-50"
-                    : "border-blue-400 bg-purple-50 hover:bg-purple-100"
+                    : "border-[#249b56] bg-purple-50 hover:bg-[#c2f5d7]"
                 }`}
             >
               <div className="flex flex-col items-center gap-3">
-                <div className="bg-blue-600 text-white p-4 rounded-full">
+                <div className="bg-[#249b56] text-white p-4 rounded-full">
                   ⬆️
                 </div>
 
@@ -160,7 +160,7 @@ const TeamForm = ({ isOpen, onClose, onSubmit }) => {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="w-50 bg-[#1b71cc] text-white py-2 rounded-lg mt-3 hover:bg-blue-700 transition"
+              className="w-50 bg-[#249b56] cursor-pointer text-white py-2 rounded-lg mt-3 hover:bg-[#094522] transition"
             >
               Add Member
             </button>

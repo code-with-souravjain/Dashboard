@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DashboardLeft from "./DashboardLeft";
 import DashboardRight from "./DashboardRight";
+import Colorpalete from "../../utilities/Colorpalate"
 
 export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -19,6 +20,8 @@ export default function Dashboard() {
       />
 
       <DashboardRight setMobileSidebarOpen={setMobileSidebarOpen} />
+
+      <Colorpalete/>
     </div>
   );
 }

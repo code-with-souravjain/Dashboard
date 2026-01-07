@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TeamForm from "./TeamForm";
+import Button from "../../utilities/Button";
 
 const Teams = () => {
   // State to show/hide form popup
@@ -50,12 +51,14 @@ useEffect(() => {
         </div>
 
         {/* Add Member Button */}
-        <button
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition cursor-pointer"
+        {/* <button
+          className="px-4 py-2 bg-[#249b56] text-white rounded-lg hover:bg-[#075327] transition cursor-pointer"
           onClick={handleTeamForm}
         >
           Add Member
-        </button>
+        </button> */}
+
+        <Button Btntext="Add Member" />
       </div>
 
       {/* Team Members Grid */}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   ResponsiveContainer,
   BarChart,
@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import { ThemeColorContext } from "../context/ThemeColorContext";
 
 const salesData = [
   { month: "Jan", totalSales: 12000, unitsSold: 5500 },
@@ -25,14 +26,12 @@ const salesData = [
 ];
 
 const BarData = () => {
-  return (  
+  const { color } = useContext(ThemeColorContext);
+
+  return (
     <div className="h-[200px] w-full lg:h-[300px]">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          data={salesData}
-          barCategoryGap="15%"
-          barGap={2}
-        >
+        <BarChart data={salesData} barCategoryGap="15%" barGap={2}>
           <XAxis dataKey="month" />
           <YAxis />
           <Tooltip cursor={{ fill: "transparent" }} />
@@ -41,7 +40,7 @@ const BarData = () => {
           {/* Total Sales Bar */}
           <Bar
             dataKey="totalSales"
-            fill="#0e7c3c"
+            fill={color}
             radius={[4, 4, 0, 0]}
             activeBar={false}
           />
@@ -49,9 +48,8 @@ const BarData = () => {
           {/* Units Sold Bar */}
           <Bar
             dataKey="unitsSold"
-            fill="#61c27c"
+            fill={`${color}90`} 
             radius={[4, 4, 0, 0]}
-            activeBar={false}
           />
         </BarChart>
       </ResponsiveContainer>

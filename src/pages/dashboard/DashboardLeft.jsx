@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -15,6 +15,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 import LogoutPopup from "../../components/LogoutPopup";
+import { ThemeColorContext } from "../../context/ThemeColorContext";
 
 export default function DashboardLeft({
   sidebarOpen,
@@ -36,12 +37,14 @@ export default function DashboardLeft({
 
   const [openDropdown, setOpenDropdown] = useState(false);
 
+  const { color } = useContext(ThemeColorContext);
+
   return (
     <>
       {/* ================= DESKTOP SIDEBAR ================= */}
       <div
-        className={`hidden md:block bg-white shadow-sm transition-all mt-5 rounded-t-lg duration-300 overflow-y-scroll ${
-          sidebarOpen ? "w-64" : "w-20"
+        className={`hidden md:block bg-white shadow-sm transition-all mt-5 rounded-t-lg duration-300 ${
+          sidebarOpen ? "w-60" : "w-20"
         }`}
       >
         <div className="flex items-center justify-between p-4 border-b">
@@ -63,11 +66,14 @@ export default function DashboardLeft({
           <Link to="/admin">
             <button
               onClick={() => setActiveItem("home")}
-              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+              style={
                 activeItem === "home"
-                  ? "bg-[#249b56] text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              } ${sidebarOpen ? "" : "justify-center"}`}
+                  ? { backgroundColor: color, color: "white" }
+                  : {}
+              }
+              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                sidebarOpen ? "" : "justify-center"
+              }`}
             >
               <DashboardCustomizeIcon />
               {sidebarOpen && <span>HomeDash</span>}
@@ -78,11 +84,14 @@ export default function DashboardLeft({
           <Link to="/admin/inbox">
             <button
               onClick={() => setActiveItem("inbox")}
-              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+              style={
                 activeItem === "inbox"
-                  ? "bg-[#249b56] text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              } ${sidebarOpen ? "" : "justify-center"}`}
+                  ? { backgroundColor: color, color: "white" }
+                  : {}
+              }
+              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                sidebarOpen ? "" : "justify-center"
+              }`}
             >
               <InboxIcon />
               {sidebarOpen && <span>Inbox</span>}
@@ -93,11 +102,14 @@ export default function DashboardLeft({
           <Link to="/admin/reports">
             <button
               onClick={() => setActiveItem("reports")}
-              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+              style={
                 activeItem === "reports"
-                  ? "bg-[#249b56] text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              } ${sidebarOpen ? "" : "justify-center"}`}
+                  ? { backgroundColor: color, color: "white" }
+                  : {}
+              }
+              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                sidebarOpen ? "" : "justify-center"
+              }`}
             >
               <TextSnippetIcon />
               {sidebarOpen && <span>All Reports</span>}
@@ -108,11 +120,14 @@ export default function DashboardLeft({
           <Link to="/admin/settings">
             <button
               onClick={() => setActiveItem("settings")}
-              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+              style={
                 activeItem === "settings"
-                  ? "bg-[#249b56] text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              } ${sidebarOpen ? "" : "justify-center"}`}
+                  ? { backgroundColor: color, color: "white" }
+                  : {}
+              }
+              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                sidebarOpen ? "" : "justify-center"
+              }`}
             >
               <SettingsIcon />
               {sidebarOpen && <span>Settings</span>}
@@ -123,11 +138,14 @@ export default function DashboardLeft({
           <Link to="/admin/userprofile">
             <button
               onClick={() => setActiveItem("userprofile")}
-              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+              style={
                 activeItem === "userprofile"
-                  ? "bg-[#249b56] text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              } ${sidebarOpen ? "" : "justify-center"}`}
+                  ? { backgroundColor: color, color: "white" }
+                  : {}
+              }
+              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                sidebarOpen ? "" : "justify-center"
+              }`}
             >
               <AccountCircleIcon />
               {sidebarOpen && <span>User Profile</span>}
@@ -138,11 +156,14 @@ export default function DashboardLeft({
           <Link to="/admin/teams">
             <button
               onClick={() => setActiveItem("teams")}
-              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+              style={
                 activeItem === "teams"
-                  ? "bg-[#249b56] text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              } ${sidebarOpen ? "" : "justify-center"}`}
+                  ? { backgroundColor: color, color: "white" }
+                  : {}
+              }
+              className={`w-full flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                sidebarOpen ? "" : "justify-center"
+              }`}
             >
               <GroupsIcon />
               {sidebarOpen && <span>Our Team</span>}
@@ -152,14 +173,18 @@ export default function DashboardLeft({
           {/* Support */}
 
           <div>
+            {/* Main Support Button */}
             <button
               onClick={() => setOpenDropdown(!openDropdown)}
-              className={`w-full flex items-center justify-between items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+              style={
                 activeItem === "support" ||
                 ["faq", "general", "tickets"].includes(activeItem)
-                  ? "bg-[#249b56] text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              } ${sidebarOpen ? "" : "justify-center"}`}
+                  ? { backgroundColor: color, color: "white" }
+                  : {}
+              }
+              className={`w-full flex items-center justify-between gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
+                sidebarOpen ? "" : "justify-center"
+              }`}
             >
               <div className="flex items-center gap-3">
                 <SupportAgentIcon />
@@ -172,16 +197,20 @@ export default function DashboardLeft({
               )}
             </button>
 
+            {/* Dropdown Items */}
             {openDropdown && sidebarOpen && (
-              <div className="pl-8">
+              <div
+                className="pl-10"
+              >
                 <Link to="/admin/support/faq">
                   <button
                     onClick={() => setActiveItem("faq")}
-                    className={`w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer ${
+                    style={
                       activeItem === "faq"
-                        ? "bg-[#249b56] text-white"
-                        : "text-gray-600 hover:bg-gray-100"
-                    }`}
+                        ? { backgroundColor: color, color: "white" }
+                        : {}
+                    }
+                    className="w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer text-gray-600 hover:bg-gray-100"
                   >
                     FAQ
                   </button>
@@ -190,11 +219,12 @@ export default function DashboardLeft({
                 <Link to="/admin/support/general">
                   <button
                     onClick={() => setActiveItem("general")}
-                    className={`w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer ${
+                    style={
                       activeItem === "general"
-                        ? "bg-[#249b56] text-white"
-                        : "text-gray-600 hover:bg-gray-100"
-                    }`}
+                        ? { backgroundColor: color, color: "white" }
+                        : {}
+                    }
+                    className="w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer text-gray-600 hover:bg-gray-100"
                   >
                     General Enquiry
                   </button>
@@ -203,11 +233,12 @@ export default function DashboardLeft({
                 <Link to="/admin/support/tickets">
                   <button
                     onClick={() => setActiveItem("tickets")}
-                    className={`w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer ${
+                    style={
                       activeItem === "tickets"
-                        ? "bg-[#249b56] text-white"
-                        : "text-gray-600 hover:bg-gray-100"
-                    }`}
+                        ? { backgroundColor: color, color: "white" }
+                        : {}
+                    }
+                    className="w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer text-gray-600 hover:bg-gray-100"
                   >
                     Tickets
                   </button>
@@ -215,9 +246,6 @@ export default function DashboardLeft({
               </div>
             )}
           </div>
-
-          
-
 
           {/* LOGOUT */}
           <button

@@ -18,7 +18,10 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import LogoutPopup from "./LogoutPopup";
 import { Link, useNavigate } from "react-router-dom";
 
-import ExcentLogo from "../Images/excent.png"
+import ExcentLogo from "../Images/excent.png";
+
+import { useContext } from "react";
+import { ThemeColorContext } from "../context/ThemeColorContext";
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -46,21 +49,23 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-    const [exit, setExit] = useState(false);
-  
+  const [exit, setExit] = useState(false);
+
   // const handleLogout = () => {
   //   localStorage.removeItem("authtoken");
   //   handleMenuClose();
   //   navigate("/admin/login");
   // };
 
-   const handleLogoutClick = () => setExit(true);
+  const handleLogoutClick = () => setExit(true);
   const handleCancel = () => setExit(false);
   const handleConfirmLogout = () => {
     localStorage.removeItem("authtoken");
     setExit(false);
     navigate("/admin/login");
   };
+
+  const { color } = useContext(ThemeColorContext);
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -74,20 +79,19 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Link to="/admin/userprofile" style={{ textDecoration: "none", color: "inherit" }}>
+        <Link
+          to="/admin/userprofile"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
           Edit Profile
         </Link>
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
-       {/* logout popup */}
-              {exit && (
-                <LogoutPopup
-                  onCancel={handleCancel}
-                  onConfirm={handleConfirmLogout}
-                />
-              )}
-     
+      {/* logout popup */}
+      {exit && (
+        <LogoutPopup onCancel={handleCancel} onConfirm={handleConfirmLogout} />
+      )}
     </Menu>
   );
 
@@ -112,7 +116,11 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
 
       <MenuItem>
-        <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+        >
           <Badge badgeContent={17} color="error">
             <NotificationsIcon />
           </Badge>
@@ -140,8 +148,8 @@ export default function PrimarySearchAppBar() {
       <AppBar
         position="sticky"
         sx={{
-          background: "#0e7c3c",
-          borderBottom: "1px solid #0e7c3c",
+          background: color,
+          borderBottom: `1px solid ${color}`,
           boxShadow: "none",
         }}
       >
@@ -167,14 +175,24 @@ export default function PrimarySearchAppBar() {
             <Box sx={{ flexGrow: 1 }} />
 
             {/* Desktop Icons */}
-            <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}>
-              <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <Box
+              sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
+            >
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="inherit"
+              >
                 <Badge badgeContent={4} color="error">
                   <MailIcon />
                 </Badge>
               </IconButton>
 
-              <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit"
+              >
                 <Badge badgeContent={17} color="error">
                   <NotificationsIcon />
                 </Badge>
