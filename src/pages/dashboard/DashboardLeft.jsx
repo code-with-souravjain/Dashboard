@@ -40,13 +40,15 @@ export default function DashboardLeft({
 
   const [openDropdown, setOpenDropdown] = useState(false);
 
+  const [iconDropdown, setIconDropdown] = useState(false);
+
   const { color } = useContext(ThemeColorContext);
 
   const { lng } = useContext(LanguageContext);
   const lngText = LanguageData[lng];
+  
 
-  console.log(lngText.home) // Hello
-
+  console.log(lngText.home); // Hello
 
   return (
     <>
@@ -185,10 +187,16 @@ export default function DashboardLeft({
           <div>
             {/* Main Support Button */}
             <button
-              onClick={() => setOpenDropdown(!openDropdown)}
+              onClick={() => {
+                if (sidebarOpen) {
+                  setOpenDropdown(!openDropdown);
+                } else {
+                  setIconDropdown(!iconDropdown);
+                }
+              }}
               style={
                 activeItem === "support" ||
-                ["faq", "general", "tickets"].includes(activeItem)
+                ["faq", "enquiry", "tickets"].includes(activeItem)
                   ? { backgroundColor: color, color: "white" }
                   : {}
               }
@@ -224,11 +232,11 @@ export default function DashboardLeft({
                   </button>
                 </Link>
 
-                <Link to="/admin/support/generalenquiry">
+                <Link to="/admin/support/enquiry">
                   <button
-                    onClick={() => setActiveItem("generalenquiry")}
+                    onClick={() => setActiveItem("enquiry")}
                     style={
-                      activeItem === "generalenquiry"
+                      activeItem === "enquiry"
                         ? { backgroundColor: color, color: "white" }
                         : {}
                     }
@@ -249,6 +257,63 @@ export default function DashboardLeft({
                     className="w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer text-gray-600 hover:bg-gray-100"
                   >
                     {sidebarOpen && <span>{lngText.tickets}</span>}
+                  </button>
+                </Link>
+              </div>
+            )}
+
+            {/* agar meri sidebar band hai to sirf support ka icon dikhega and uspe click karne pai box oppen hoga side mai */}
+
+            {!sidebarOpen && iconDropdown && (
+              <div className="w-44 px-5 py-4 bg-gray-200/80 absolute bottom-12 left-17 z-50 shadow-lg rounded-xl">
+                <Link to="/admin/support/faq">
+                  <button
+                    onClick={() => {
+                      setActiveItem("faq");
+                      setIconDropdown(false);
+                    }}
+                    style={
+                      activeItem === "faq"
+                        ? { backgroundColor: color, color: "white" }
+                        : {}
+                    }
+                    className="w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer text-gray-700 hover:bg-gray-100"
+                  >
+                    <span>{lngText.faq}</span>
+                  </button>
+                </Link>
+
+                <Link to="/admin/support/enquiry">
+                  <button
+                    onClick={() => {
+                      setActiveItem("enquiry");
+                      setIconDropdown(false);
+                    }}
+                    style={
+                      activeItem === "enquiry"  
+                        ? { backgroundColor: color, color: "white" }
+                        : {}
+                    }
+                    className="w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer text-gray-700 hover:bg-gray-100"
+                  >
+                    <span>{lngText.enquiry}</span>
+                  </button>
+                </Link>
+
+                <Link to="/admin/support/tickets">
+                  <button
+                    onClick={() => {
+                      setActiveItem("tickets");
+                      setIconDropdown(false);
+                    }}
+                    style={
+                      activeItem === "tickets"
+                        ? { backgroundColor: color, color: "white" }
+                        : {}
+                    }
+                    className="w-full flex items-center gap-3 p-2 rounded-lg cursor-pointer text-gray-700 hover:bg-gray-100"
+                  >
+                    <span>{lngText.tickets}</span>
                   </button>
                 </Link>
               </div>

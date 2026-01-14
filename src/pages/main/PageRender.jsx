@@ -20,7 +20,7 @@ const pageMap = {
   userprofile: <UserProfile />,
   teams: <Teams />,
   faq: <Faq />,
-  generalenquiry: <GeneralEnquiry />,
+  enquiry: <GeneralEnquiry />,
   tickets: <Tickets />,
 };
 
