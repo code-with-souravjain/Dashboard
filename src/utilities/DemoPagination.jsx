@@ -17,7 +17,7 @@ const DemoPagination = ({ totalPages, currentPage, setCurrentPage }) => {
           },
           "& .Mui-selected": {
             backgroundColor: color, // selected item background
-            color: "#fff", // selected item text
+            color: "black", // selected item text
             "&:hover": {
               backgroundColor: color, // hover same as selected
             },

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { replace, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -62,7 +62,7 @@ const Login = () => {
 
     localStorage.setItem("authtoken", fakeToken)
 
-    navigate("/admin", {replace: true});
+    navigate("/admin", {replace: true}); // replace means after login user cannot back to loginpage with back btn
 
     console.log("Login data:", formData);
   };
@@ -93,7 +93,7 @@ const Login = () => {
               name="email"
               placeholder="you@example.com"
               className={`w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 ${
-                errors.email ? "border-red-500 focus:ring-red-500" : "focus:ring-blue-500"
+                errors.email ? "border-red-500" : "focus:ring-blue-500"
               }`}
               value={formData.email}
               onChange={handleChange}

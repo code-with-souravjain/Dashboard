@@ -5,8 +5,8 @@ const ProtectedRouting = ({ children }) => {
   const token = localStorage.getItem("authtoken");
 
   if (!token) {
-    return <Navigate to="/admin/login" replace />;
-  }
+    return <Navigate to="/admin/login"  />;
+  } 
 
   return children;
 };

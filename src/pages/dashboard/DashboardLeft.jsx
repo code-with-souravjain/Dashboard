@@ -16,6 +16,9 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 import LogoutPopup from "../../components/LogoutPopup";
 import { ThemeColorContext } from "../../context/ThemeColorContext";
+import LanguageData from "../../components/LanguageData";
+
+import { LanguageContext } from "../../context/LanguageContext";
 
 export default function DashboardLeft({
   sidebarOpen,
@@ -39,6 +42,12 @@ export default function DashboardLeft({
 
   const { color } = useContext(ThemeColorContext);
 
+  const { lng } = useContext(LanguageContext);
+  const lngText = LanguageData[lng];
+
+  console.log(lngText.home) // Hello
+
+
   return (
     <>
       {/* ================= DESKTOP SIDEBAR ================= */}
@@ -50,7 +59,7 @@ export default function DashboardLeft({
         <div className="flex items-center justify-between p-4 border-b">
           {sidebarOpen && (
             <h1 className="text-xl font-bold text-gray-800 lg:ms-2">
-              Dashboard
+              {lngText.dashboard}
             </h1>
           )}
           <button
@@ -76,7 +85,7 @@ export default function DashboardLeft({
               }`}
             >
               <DashboardCustomizeIcon />
-              {sidebarOpen && <span>HomeDash</span>}
+              {sidebarOpen && <span>{lngText.home}</span>}
             </button>
           </Link>
 
@@ -94,7 +103,7 @@ export default function DashboardLeft({
               }`}
             >
               <InboxIcon />
-              {sidebarOpen && <span>Inbox</span>}
+              {sidebarOpen && <span>{lngText.inbox}</span>}
             </button>
           </Link>
 
@@ -112,7 +121,8 @@ export default function DashboardLeft({
               }`}
             >
               <TextSnippetIcon />
-              {sidebarOpen && <span>All Reports</span>}
+              {/* {sidebarOpen && <span>All Reports</span>} */}
+              {sidebarOpen && <span>{lngText.reports}</span>}
             </button>
           </Link>
 
@@ -130,7 +140,7 @@ export default function DashboardLeft({
               }`}
             >
               <SettingsIcon />
-              {sidebarOpen && <span>Settings</span>}
+              {sidebarOpen && <span>{lngText.settings}</span>}
             </button>
           </Link>
 
@@ -148,7 +158,7 @@ export default function DashboardLeft({
               }`}
             >
               <AccountCircleIcon />
-              {sidebarOpen && <span>User Profile</span>}
+              {sidebarOpen && <span>{lngText.userprofile}</span>}
             </button>
           </Link>
 
@@ -166,7 +176,7 @@ export default function DashboardLeft({
               }`}
             >
               <GroupsIcon />
-              {sidebarOpen && <span>Our Team</span>}
+              {sidebarOpen && <span>{lngText.teams}</span>}
             </button>
           </Link>
 
@@ -188,7 +198,7 @@ export default function DashboardLeft({
             >
               <div className="flex items-center gap-3">
                 <SupportAgentIcon />
-                {sidebarOpen && <span>Support</span>}
+                {sidebarOpen && <span>{lngText.support}</span>}
               </div>
               {sidebarOpen && (
                 <span>
@@ -199,9 +209,7 @@ export default function DashboardLeft({
 
             {/* Dropdown Items */}
             {openDropdown && sidebarOpen && (
-              <div
-                className="pl-10"
-              >
+              <div className="pl-10">
                 <Link to="/admin/support/faq">
                   <button
                     onClick={() => setActiveItem("faq")}
@@ -212,21 +220,21 @@ export default function DashboardLeft({
                     }
                     className="w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer text-gray-600 hover:bg-gray-100"
                   >
-                    FAQ
+                    {sidebarOpen && <span>{lngText.faq}</span>}
                   </button>
                 </Link>
 
-                <Link to="/admin/support/general">
+                <Link to="/admin/support/generalenquiry">
                   <button
-                    onClick={() => setActiveItem("general")}
+                    onClick={() => setActiveItem("generalenquiry")}
                     style={
-                      activeItem === "general"
+                      activeItem === "generalenquiry"
                         ? { backgroundColor: color, color: "white" }
                         : {}
                     }
                     className="w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer text-gray-600 hover:bg-gray-100"
                   >
-                    General Enquiry
+                    {sidebarOpen && <span>{lngText.enquiry}</span>}
                   </button>
                 </Link>
 
@@ -240,7 +248,7 @@ export default function DashboardLeft({
                     }
                     className="w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer text-gray-600 hover:bg-gray-100"
                   >
-                    Tickets
+                    {sidebarOpen && <span>{lngText.tickets}</span>}
                   </button>
                 </Link>
               </div>
@@ -255,7 +263,7 @@ export default function DashboardLeft({
             }`}
           >
             <LogoutIcon />
-            {sidebarOpen && <span>Logout</span>}
+            {sidebarOpen && <span>{lngText.logout}</span>}
           </button>
 
           {/* logout popup */}
@@ -279,7 +287,7 @@ export default function DashboardLeft({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between p-4 border-b">
-              <h1 className="text-xl font-bold">Dashboard</h1>
+              <h1 className="text-xl font-bold">{lngText.dashboard}</h1>
               <button
                 onClick={() => setMobileSidebarOpen(false)}
                 className="p-2 hover:bg-gray-100 rounded-lg"
@@ -299,7 +307,7 @@ export default function DashboardLeft({
                   className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                 >
                   <DashboardCustomizeIcon />
-                  <span>HomeDash</span>
+                  <span>{lngText.home}</span>
                 </button>
               </Link>
 
@@ -313,7 +321,7 @@ export default function DashboardLeft({
                   className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                 >
                   <InboxIcon />
-                  <span>Inbox</span>
+                  <span>{lngText.inbox}</span>
                 </button>
               </Link>
 
@@ -327,7 +335,7 @@ export default function DashboardLeft({
                   className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                 >
                   <TextSnippetIcon />
-                  <span>All Reports</span>
+                  <span>{lngText.reports}</span>
                 </button>
               </Link>
 
@@ -341,7 +349,7 @@ export default function DashboardLeft({
                   className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                 >
                   <SettingsIcon />
-                  <span>Settings</span>
+                  <span>{lngText.settings}</span>
                 </button>
               </Link>
 
@@ -355,7 +363,7 @@ export default function DashboardLeft({
                   className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                 >
                   <AccountCircleIcon />
-                  <span>User Profile</span>
+                  <span>{lngText.profile}</span>
                 </button>
               </Link>
 
@@ -369,7 +377,7 @@ export default function DashboardLeft({
                   className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                 >
                   <GroupsIcon />
-                  <span>Our Team</span>
+                  <span>{lngText.team}</span>
                 </button>
               </Link>
 
@@ -387,7 +395,7 @@ export default function DashboardLeft({
                 >
                   <div className="flex items-center gap-3">
                     <SupportAgentIcon />
-                    {sidebarOpen && <span>Support</span>}
+                    {sidebarOpen && <span>{lngText.support}</span>}
                   </div>
                   {sidebarOpen && (
                     <span>
@@ -407,7 +415,7 @@ export default function DashboardLeft({
                             : "text-gray-600 hover:bg-gray-100"
                         }`}
                       >
-                        FAQ
+                        <span>{lngText.faq}</span>
                       </button>
                     </Link>
 
@@ -420,7 +428,7 @@ export default function DashboardLeft({
                             : "text-gray-600 hover:bg-gray-100"
                         }`}
                       >
-                        General Enquiry
+                        <span>{lngText.enquiry}</span>
                       </button>
                     </Link>
 
@@ -433,7 +441,7 @@ export default function DashboardLeft({
                             : "text-gray-600 hover:bg-gray-100"
                         }`}
                       >
-                        Tickets
+                        <span>{lngText.tickets}</span>
                       </button>
                     </Link>
                   </div>
@@ -448,7 +456,7 @@ export default function DashboardLeft({
                 }`}
               >
                 <LogoutIcon />
-                {sidebarOpen && <span>Logout</span>}
+                {sidebarOpen && <span>{lngText.logout}</span>}
               </button>
 
               {/* logout popup */}

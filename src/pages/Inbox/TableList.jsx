@@ -22,7 +22,7 @@ const TableList = ({ students, genderFilter, setGenderFilter }) => {
 
   return (
     <div className="overflow-x-auto md:overflow-x-hidden">
-      <table className="w-full min-w-max md:min-w-full bg-white shadow-lg border-collapse">
+      <table id="my-table" className="w-full min-w-max md:min-w-full bg-white shadow-lg border-collapse">
         <thead className="text-left">
           <tr>
             <th
@@ -63,7 +63,7 @@ const TableList = ({ students, genderFilter, setGenderFilter }) => {
             <th  style={{ backgroundColor: color }} className=" text-white p-2 text-xs md:text-sm">
               Status
             </th>
-            <th  style={{ backgroundColor: color }}s className=" text-white p-2 text-xs md:text-sm">
+            <th  style={{ backgroundColor: color }} className=" text-white p-2 text-xs md:text-sm">
               Action
             </th>
           </tr>

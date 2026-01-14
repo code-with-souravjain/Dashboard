@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
-:root{
-  --primary-color: pink;
+:root {
+  --primary-color: #0e7c3c; /* default color */
 }
 
 

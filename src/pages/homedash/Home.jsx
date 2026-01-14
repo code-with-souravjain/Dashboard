@@ -8,32 +8,37 @@ import BarData from "../../bardata/BarData";
 import PieData from "../../bardata/PieData";
 import { useContext } from "react";
 import { ThemeColorContext } from "../../context/ThemeColorContext";
+import { LanguageContext } from "../../context/LanguageContext";
+import LanguageData from "../../components/LanguageData";
+
 
 const Home = () => {
   const { color } = useContext(ThemeColorContext);
+  const {lng} = useContext(LanguageContext)
+  const lngText = LanguageData[lng]
 
   const dashboardStats = [
     {
       id: 1,
-      title: "Total Users",
+      title: lngText.totalUsers,
       count: 25,
       icon: <PeopleIcon style={{ fontSize: 40, color: color }} />,
     },
     {
       id: 2,
-      title: "Pending Users",
+      title:lngText.pendingUsers,
       count: 3,
       icon: <PersonRemoveIcon style={{ fontSize: 40, color: color }} />,
     },
     {
       id: 3,
-      title: "Ongoing Tasks",
+      title: lngText.ongoingTasks,
       count: 7,
       icon: <FormatListNumberedIcon style={{ fontSize: 40, color: color }} />,
     },
     {
       id: 4,
-      title: "Pending Tasks",
+      title: lngText.pendingTasks,
       count: 3,
       icon: <PendingActionsIcon style={{ fontSize: 40, color: color }} />,
     },
@@ -42,7 +47,7 @@ const Home = () => {
   return (
     <div className="px-1 md:px-5 h-auto  mx-auto">
       <h1 className="text-xl md:text-2xl font-semibold mb-6">
-        Welcome Admin....
+        {lngText.welcome}
       </h1>
 
       {/* Dashboard cards grid */}
@@ -70,7 +75,7 @@ const Home = () => {
           {/* Left Chart Box */}
           <div className="border-b-4 border-green-900 rounded-xl shadow p-4">
             <h3 className="text-lg font-semibold mb-6 text-gray-700">
-              Monthly Sales
+              {lngText.monthlySales}
             </h3>
             <BarData />
           </div>
@@ -78,7 +83,7 @@ const Home = () => {
           {/* Right Pie Chart Box */}
           <div className="border-b-4 border-indigo-500 rounded-xl shadow p-4">
             <h3 className="text-lg font-semibold mb-6 text-gray-700">
-              Units Sold
+             {lngText.unitsSold}
             </h3>
             <PieData />
           </div>

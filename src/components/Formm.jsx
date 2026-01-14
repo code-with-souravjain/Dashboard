@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import InputFields from "../components/InputFields";
 import CreateIcon from "@mui/icons-material/Create";
@@ -71,7 +72,7 @@ const Formm = ({ isOpen, onClose }) => {
       newErrors.email = "Enter a valid email address";
 
     if (!formData.phone) newErrors.phone = "Phone number is required";
-    else if (!/^\d{10}$/.test(formData.phone))
+    else if (!/^[6-9]\d{9}$/.test(formData.phone))
       newErrors.phone = "Enter valid 10 digit phone number";
 
     if (!formData.dob) newErrors.dob = "Date of birth is required";
@@ -133,7 +134,7 @@ const Formm = ({ isOpen, onClose }) => {
         {/* BODY */}
         <form
           onSubmit={handleSubmit}
-          className="px-6 py-5 grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[75vh] overflow-y-auto"
+          className=" md:px-6 md:py-5 grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[75vh] overflow-y-auto"
         >
           {/* OTHER FIELDS */}
           <InputFields

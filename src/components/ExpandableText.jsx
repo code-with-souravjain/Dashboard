@@ -29,11 +29,10 @@ const ExpandableText = ({ text, width = "400px", limit }) => {
       {open && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/30"
-          onClick={() => setOpen(false)} // outside click
+          onClick={() => setOpen(false)} 
         >
           <div
             className="bg-white rounded-md shadow-lg px-4 py-3 max-w-sm"
-            onClick={(e) => e.stopPropagation()} // prevent close on inner click
           >
             <div className="flex justify-between items-start gap-3">
               <div className="text-gray-800 break-words">

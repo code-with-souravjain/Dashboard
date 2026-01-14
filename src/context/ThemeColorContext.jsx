@@ -9,8 +9,7 @@ const ThemeColorProvider = ({ children }) => {
 
   useEffect(() => {
     document.documentElement.style.setProperty(
-      "--primary-color",
-      color
+      "--primary-color", color
     );
     localStorage.setItem("theme-color", color);
   }, [color]);

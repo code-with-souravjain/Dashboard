@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Icons from "../../utilities/Icons";
 import { ProfileEditBtn } from "../../utilities/Button";
+import { LanguageContext } from "../../context/LanguageContext";
+import LanguageData from "../../components/LanguageData";
 
 const UserProfile = () => {
   // const [profilePhoto, setProfilePhoto] = useState(null);
@@ -33,9 +35,12 @@ const UserProfile = () => {
     whatsapp: "1234569878",
   };
 
+  const {lng} = useContext(LanguageContext)
+  const lngText = LanguageData[lng]
+
   return (
     <div className="px-4">
-      <h1 className="text-lg md:text-2xl font-semibold mb-6">Profile</h1>
+      <h1 className="text-lg md:text-2xl font-semibold mb-6">{lngText.profile}</h1>
 
       {/* PROFILE HEADER */}
       <div className="bg-white rounded-2xl border p-6 mb-6">
@@ -96,33 +101,33 @@ const UserProfile = () => {
       {/* PERSONAL INFORMATION */}
       <div className="bg-white rounded-2xl border p-6 mb-6">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold">Personal Information</h3>
+          <h3 className="text-lg font-semibold">{lngText.personalInformation}</h3>
           <ProfileEditBtn />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
           <div>
-            <p className="text-gray-500">First Name</p>
+            <p className="text-gray-500">{lngText.firstName}</p>
             <p className="font-medium">{user.firstName}</p>
           </div>
 
           <div>
-            <p className="text-gray-500">Last Name</p>
+            <p className="text-gray-500">{lngText.lastName}</p>
             <p className="font-medium">{user.lastName}</p>
           </div>
 
           <div>
-            <p className="text-gray-500">Email</p>
+            <p className="text-gray-500">{lngText.email}</p>
             <p className="font-medium">{user.email}</p>
           </div>
 
           <div>
-            <p className="text-gray-500">Phone</p>
+            <p className="text-gray-500">{lngText.phone}</p>
             <p className="font-medium">{user.phone}</p>
           </div>
 
           <div>
-            <p className="text-gray-500">Bio</p>
+            <p className="text-gray-500">{lngText.bio}</p>
             <p className="font-medium">{user.bio}</p>
           </div>
         </div>
@@ -131,23 +136,23 @@ const UserProfile = () => {
       {/* ADDRESS */}
       <div className="bg-white rounded-2xl border p-6">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold">Address</h3>
+          <h3 className="text-lg font-semibold">{lngText.address}</h3>
           <ProfileEditBtn />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
           <div>
-            <p className="text-gray-500">Country</p>
+            <p className="text-gray-500">{lngText.country}</p>
             <p className="font-medium">{user.country}</p>
           </div>
 
           <div>
-            <p className="text-gray-500">City / State</p>
+            <p className="text-gray-500">{lngText.cityState}</p>
             <p className="font-medium">{user.city}</p>
           </div>
 
           <div>
-            <p className="text-gray-500">Postal Code</p>
+            <p className="text-gray-500">{lngText.postalCode}</p>
             <p className="font-medium">{user.postalCode}</p>
           </div>
         </div>

@@ -25,9 +25,9 @@ export const NormalBtn = ({ normaltext, onClick }) => {
   );
 };
 
-export const DownloadBtn = ({ Download }) => {
+export const DownloadBtn = ({ Download, onClick }) => {
   return (
-    <button className="px-5 py-2  bg-[#008236] text-white rounded-md cursor-pointer mb-4 text-sm lg:text-md">
+    <button onClick={onClick} className="px-5 py-2  bg-[#008236] text-white rounded-md cursor-pointer mb-4 text-sm lg:text-md">
       {Download}
     </button>
   );

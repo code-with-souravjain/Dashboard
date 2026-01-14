@@ -2,10 +2,14 @@ import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { useContext } from "react";
 import { ThemeColorContext } from "../../context/ThemeColorContext";
-ThemeColorContext;
+import { LanguageContext } from "../../context/LanguageContext";
+import LanguageData from "../../components/LanguageData";
+
 
 const Searchbar = ({ searchTerm, setSearchTerm }) => {
   const { color } = useContext(ThemeColorContext);
+  const {lng} = useContext(LanguageContext)
+  const lngText = LanguageData[lng]
 
   return (
     <div className="relative w-full lg:w-72">
@@ -19,7 +23,7 @@ const Searchbar = ({ searchTerm, setSearchTerm }) => {
       {/* Input */}
       <input
         type="search"
-        placeholder="Search..."
+        placeholder={lngText.search}
         className="
           w-full pl-11 pr-4 py-3
           rounded-full border

@@ -22,6 +22,7 @@ import ExcentLogo from "../Images/excent.png";
 
 import { useContext } from "react";
 import { ThemeColorContext } from "../context/ThemeColorContext";
+import { LanguageContext } from "../context/LanguageContext";
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -143,6 +144,12 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
+  const { lng, setLng } = useContext(LanguageContext);
+
+  const handlelngchange = (e) => {
+    setLng(e.target.value);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -178,6 +185,20 @@ export default function PrimarySearchAppBar() {
             <Box
               sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
             >
+              <div>
+                <select
+                  value={lng}
+                  onChange={handlelngchange}
+                  className=" text-black bg-gray-100 px-2 py-2  border-0 rounded-md mr-3 text-xs md:text-sm"
+                >
+                  <option value="en">English</option>
+                  <option value="hi">Hindi</option>
+                  <option value="pa">Punjabi</option>
+                  <option value="fr">French</option>
+                  <option value="au">Australian</option>
+                </select>
+              </div>
+
               <IconButton
                 size="large"
                 aria-label="show 4 new mails"

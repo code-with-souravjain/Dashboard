@@ -1,6 +1,7 @@
 import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Outlet } from "react-router-dom";
+// import { Outlet } from "react-router-dom";
+import PageRender from "../main/PageRender";
 
 export default function DashboardRight({ setMobileSidebarOpen }) {
   return (
@@ -9,13 +10,14 @@ export default function DashboardRight({ setMobileSidebarOpen }) {
 
         <button
           className="md:hidden mb-6 p-2 hover:bg-re rounded-lg shadow-sm bg-white"
-          onClick={() => setMobileSidebarOpen(true)}
+          onClick={() => setMobileSidebarOpen(true)} 
         >
           <MenuIcon />
         </button>
 
         <div className="bg-white rounded-lg shadow-sm p-5">
-          <Outlet />
+           <PageRender/>
+          {/* <Outlet /> */} 
         </div>
       </div>
     </div>

@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TeamForm from "./TeamForm";
 import Button from "../../utilities/Button";
+import { LanguageContext } from "../../context/LanguageContext";
+import LanguageData from "../../components/LanguageData";
+
 
 const Teams = () => {
   // State to show/hide form popup
   const [showForm, setShowForm] = useState(false);
+
+  const{lng} = useContext(LanguageContext);
+  const lngText = LanguageData[lng]
 
   // State to store all team members
   const [teamMembers, setTeamMember] = useState([]);
@@ -46,19 +52,19 @@ useEffect(() => {
       {/* Page Header */}
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-800">Team Members</h1>
-          <p className="text-sm text-gray-500 mt-1">Manage your team and roles</p>
+          <h1 className="text-2xl font-semibold text-gray-800">{lngText.teamMembers}</h1>
+          <p className="text-sm text-gray-500 mt-1">{lngText.teamDescription}</p>
         </div>
 
         {/* Add Member Button */}
-        {/* <button
+        <button
           className="px-4 py-2 bg-[#249b56] text-white rounded-lg hover:bg-[#075327] transition cursor-pointer"
           onClick={handleTeamForm}
         >
           Add Member
-        </button> */}
+        </button>
 
-        <Button Btntext="Add Member" />
+        {/* <Button Btntext="Add Member" /> */}
       </div>
 
       {/* Team Members Grid */}
