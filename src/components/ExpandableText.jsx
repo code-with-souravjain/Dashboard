@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ExpandableText = ({ text, width = "400px", limit }) => {
+const ExpandableText = ({ text, width, limit }) => {
   const [open, setOpen] = useState(false);
 
   // Check if text should truncate

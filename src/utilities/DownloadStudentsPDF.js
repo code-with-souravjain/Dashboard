@@ -38,11 +38,6 @@ const downloadStudentsPDF = () => {
       
     },
 
-  //   columnStyles: {
-  //   1: { overflow: "linebreak" }, // sirf Name ke liye
-  //   4: { overflow: "hidden" },    // sirf Phone ke liye
-  // },
-
   });
 
   doc.save("students-report.pdf");

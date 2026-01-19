@@ -17,8 +17,8 @@ const initialFormState = {
   role: "",
   image: null,
 };
-import Button, { NormalBtn } from "../utilities/Button"
 
+import Button, { NormalBtn } from "../utilities/Button"
 
 const roles = ["Admin", "Sub Admin", "Vendor", "Editor", "User"];
 
@@ -95,11 +95,7 @@ const Formm = ({ isOpen, onClose }) => {
 
     if (!formData.image) newErrors.image = "Profile image is required";
     else {
-      const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
-      if (!allowedTypes.includes(formData.image.type))
         newErrors.image = "Only JPG or PNG images allowed";
-      else if (formData.image.size > 5 * 1024 * 1024)
-        newErrors.image = "Image size must be less than 5MB";
     }
 
     return newErrors;
