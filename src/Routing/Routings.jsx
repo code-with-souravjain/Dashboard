@@ -12,6 +12,7 @@ const Routings = () => {
     <Routes>
       {/* PUBLIC */}
       <Route path="/admin/login" element={<Login />} />
+      <Route path="/" element={<Login />} />
 
       <Route
         path="/admin"
@@ -21,7 +22,7 @@ const Routings = () => {
           </ProtectedRouting>
         }
       >
-        <Route index element={<Home />} />
+        {/* <Route index element={<Home />} /> */}
 
         {/* normal pages */}
         <Route path=":name" element={<PageRender />} />

@@ -17,9 +17,9 @@ className="px-5 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-6
   );
 };
 
-export const NormalBtn = ({ normaltext, onClick }) => {
+export const NormalBtn = ({ normaltext, onClick, onClose }) => {
   return (
-    <button onClick={onClick} className="px-5 py-2 border text-gray-800 rounded-md cursor-pointer mb-4 text-sm lg:text-md">
+    <button onClick={onClick} onClose={onClose} className="px-5 py-2 border text-gray-800 rounded-md cursor-pointer mb-4 text-sm lg:text-md">
       {normaltext}
     </button>
   );
@@ -27,11 +27,16 @@ export const NormalBtn = ({ normaltext, onClick }) => {
 
 export const DownloadBtn = ({ Download, onClick }) => {
   return (
-    <button onClick={onClick} className="px-5 py-2  bg-[#008236] text-white rounded-md cursor-pointer mb-4 text-sm lg:text-md">
+    <button
+      type="button" 
+      onClick={onClick}
+      className="px-5 py-2 bg-[#008236] text-white rounded-md cursor-pointer mb-4 text-sm lg:text-md"
+    >
       {Download}
     </button>
   );
 };
+
 
 export const ViewBtn = () => {
   return (

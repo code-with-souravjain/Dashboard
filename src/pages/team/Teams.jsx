@@ -48,17 +48,17 @@ useEffect(() => {
 }, []);
 
   return (
-    <div className="px-6 py-4 min-h-[550px]">
+    <div className="px-2 md:px-6 py-4 min-h-[550px]">
       {/* Page Header */}
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-8 md:flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-800">{lngText.teamMembers}</h1>
-          <p className="text-sm text-gray-500 mt-1">{lngText.teamDescription}</p>
+          <h1 className="text-2xl font-semibold text-gray-800 sm:mb-5">{lngText.teamMembers}</h1>
+          <p className="text-sm text-gray-500 mt-1 ">{lngText.teamDescription}</p>
         </div>
 
         {/* Add Member Button */}
         <button
-          className="px-4 py-2 bg-[#249b56] text-white rounded-lg hover:bg-[#075327] transition cursor-pointer"
+          className="px-4 py-2 bg-[#249b56] text-white md:mt-0 mt-4 rounded-lg hover:bg-[#075327] transition cursor-pointer"
           onClick={handleTeamForm}
         >
           Add Member

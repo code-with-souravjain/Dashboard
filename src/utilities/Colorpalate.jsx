@@ -1,10 +1,17 @@
-import React, { useContext, useState } from "react";
-import SettingsIcon from '@mui/icons-material/Settings';
+import React, { useContext, useEffect, useState } from "react";
+import SettingsIcon from "@mui/icons-material/Settings";
 import { ThemeColorContext } from "../context/ThemeColorContext";
+import { useLocation } from "react-router-dom";
 
 const ColorPalette = () => {
   const [open, setOpen] = useState(false);
   const { setColor, color } = useContext(ThemeColorContext);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
 
   const paletteColors = [
     "#097235",
@@ -15,9 +22,14 @@ const ColorPalette = () => {
     "#8b5cf6",
   ];
 
+  const handleColochange = (c)=>{
+     setColor(c)
+     setOpen(false)
+  }
+
   return (
     <div
-      className={`fixed top-45 right-0 z-50 flex items-center
+      className={`fixed top-14 right-0 md:top-45 md:right-0 z-50 flex items-center
       transition-transform duration-500 ease-in-out
       ${open ? "translate-x-0" : "translate-x-[200px]"}`}
     >
@@ -38,7 +50,8 @@ const ColorPalette = () => {
           {paletteColors.map((c, index) => (
             <div
               key={index}
-              onClick={() => setColor(c)}
+              // onClick={() => setColor(c)}
+              onClick={()=> handleColochange(c)}
               className={`w-8 h-8 rounded-full border cursor-pointer
               hover:scale-110 transition-transform
               ${color === c ? "ring-2 ring-black" : ""}`}

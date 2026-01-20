@@ -46,7 +46,6 @@ export default function DashboardLeft({
 
   const { lng } = useContext(LanguageContext);
   const lngText = LanguageData[lng];
-  
 
   console.log(lngText.home); // Hello
 
@@ -54,7 +53,7 @@ export default function DashboardLeft({
     <>
       {/* ================= DESKTOP SIDEBAR ================= */}
       <div
-        className={`hidden md:block bg-white shadow-sm transition-all mt-5 rounded-t-lg duration-300 ${
+        className={`hidden md:block bg-white shadow-sm transition-all mt-4 rounded-t-lg duration-300 ${
           sidebarOpen ? "w-60" : "w-20"
         }`}
       >
@@ -290,7 +289,7 @@ export default function DashboardLeft({
                       setIconDropdown(false);
                     }}
                     style={
-                      activeItem === "enquiry"  
+                      activeItem === "enquiry"
                         ? { backgroundColor: color, color: "white" }
                         : {}
                     }
@@ -344,7 +343,7 @@ export default function DashboardLeft({
       {/* ================= MOBILE SIDEBAR ================= */}
       {mobileSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          className="fixed top-12 inset-0 bg-black bg-opacity-50 z-40 md:hidden"
           onClick={() => setMobileSidebarOpen(false)}
         >
           <div
@@ -433,80 +432,67 @@ export default function DashboardLeft({
               </Link>
 
               {/* Our Team */}
-              <Link to="/admin/demopage">
+              <Link to="/admin/teams">
                 <button
                   onClick={() => {
-                    setActiveItem("demopage");
+                    setActiveItem("teams");
                     setMobileSidebarOpen(false);
                   }}
                   className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
                 >
                   <GroupsIcon />
-                  <span>{lngText.team}</span>
+                  <span>{lngText.teams}</span>
                 </button>
               </Link>
 
-              {/* Support */}
-
+              {/* ===== SUPPORT (FIXED) ===== */}
               <div>
                 <button
                   onClick={() => setOpenDropdown(!openDropdown)}
-                  className={`w-full flex items-center justify-between items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer ${
-                    activeItem === "support" ||
-                    ["faq", "general", "tickets"].includes(activeItem)
-                      ? "bg-[#249b56] text-white"
-                      : "text-gray-700 hover:bg-gray-100"
-                  } ${sidebarOpen ? "" : "justify-center"}`}
+                  className="w-full flex items-center justify-between gap-3 p-3 rounded-lg hover:bg-gray-100"
                 >
                   <div className="flex items-center gap-3">
                     <SupportAgentIcon />
-                    {sidebarOpen && <span>{lngText.support}</span>}
+                    <span>{lngText.support}</span>
                   </div>
-                  {sidebarOpen && (
-                    <span>
-                      {openDropdown ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                    </span>
-                  )}
+                  {openDropdown ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                 </button>
 
-                {openDropdown && sidebarOpen && (
-                  <div className="pl-8">
+                {openDropdown && (
+                  <div className="pl-8 mt-1 space-y-1">
                     <Link to="/admin/support/faq">
                       <button
-                        onClick={() => setActiveItem("faq")}
-                        className={`w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer ${
-                          activeItem === "faq"
-                            ? "bg-blue-500 text-white"
-                            : "text-gray-600 hover:bg-gray-100"
-                        }`}
+                        onClick={() => {
+                          setActiveItem("faq");
+                          setMobileSidebarOpen(false);
+                        }}
+                        className="w-full text-left p-2 rounded-lg hover:bg-gray-100"
                       >
-                        <span>{lngText.faq}</span>
+                        {lngText.faq}
                       </button>
                     </Link>
 
-                    <Link to="/admin/support/general">
+                    <Link to="/admin/support/enquiry">
                       <button
-                        onClick={() => setActiveItem("general")}
-                        className={`w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer ${
-                          activeItem === "general"
-                            ? "bg-blue-500 text-white"
-                            : "text-gray-600 hover:bg-gray-100"
-                        }`}
+                        onClick={() => {
+                          setActiveItem("enquiry");
+                          setMobileSidebarOpen(false);
+                        }}
+                        className="w-full text-left p-2 rounded-lg hover:bg-gray-100"
                       >
-                        <span>{lngText.enquiry}</span>
+                        {lngText.enquiry}
                       </button>
                     </Link>
 
                     <Link to="/admin/support/tickets">
                       <button
-                        onClick={() => setActiveItem("tickets")}
-                        className={`w-full flex items-center gap-3 p-2 rounded-lg mb-1 cursor-pointer ${
-                          activeItem === "tickets"
-                            ? "bg-blue-500 text-white"
-                            : "text-gray-600 hover:bg-gray-100"
-                        }`}
+                        onClick={() => {
+                          setActiveItem("tickets");
+                          setMobileSidebarOpen(false);
+                        }}
+                        className="w-full text-left p-2 rounded-lg hover:bg-gray-100"
                       >
-                        <span>{lngText.tickets}</span>
+                        {lngText.tickets}
                       </button>
                     </Link>
                   </div>
@@ -516,15 +502,12 @@ export default function DashboardLeft({
               {/* Logout */}
               <button
                 onClick={handleLogoutClick}
-                className={`w-full flex items-center gap-3 p-3 rounded-lg cursor-pointer text-gray-700 hover:bg-gray-100 ${
-                  sidebarOpen ? "" : "justify-center"
-                }`}
+                className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100"
               >
                 <LogoutIcon />
-                {sidebarOpen && <span>{lngText.logout}</span>}
+                <span>{lngText.logout}</span>
               </button>
 
-              {/* logout popup */}
               {exit && (
                 <LogoutPopup
                   onCancel={handleCancel}

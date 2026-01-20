@@ -56,7 +56,7 @@ const TeamForm = ({ isOpen, onClose, onSubmit }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50">
+    <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-500">
       <div className="bg-white rounded-xl p-6 w-full max-w-md relative shadow-lg">
         {/* Close Button */}
         <button

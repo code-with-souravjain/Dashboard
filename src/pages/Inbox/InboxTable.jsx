@@ -4,13 +4,17 @@ import Formm from "../../components/Formm";
 import DemoPagination from "../../utilities/DemoPagination";
 import Searchbar from "./Searchbar";
 import TableList from "./TableList";
-import downloadStudentsPDF from "../../utilities/downloadStudentsPDF";
+// import downloadStudentsPDF from "../../utilities/downloadStudentsPDF";
 import { StudentContext } from "../../context/StudentContext";
 import AddUserInboxForm from "../../components/AddUserInboxForm";
+
+import DownloadSelectedData from "../../components/DownloadSelectedData";
 
 const InboxTable = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [downloadBtn, setDownloadBtn] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
   // const dataPerPage = 10;
@@ -51,16 +55,25 @@ const InboxTable = () => {
       <div className="flex flex-col lg:flex-row justify-between gap-5 mb-3">
         <Searchbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <div className="flex flex-row gap-3">
+          
           <DownloadBtn
-            onClick={() => {
-              console.log("PDF DATA:", filteredStudents);
-              downloadStudentsPDF(filteredStudents);
-            }}
+            onClick={() => setDownloadBtn(true)}
             Download="Download Report"
           />
+
+          {downloadBtn && (
+            <DownloadSelectedData
+              // students={filteredStudents}
+              onClose={() => setDownloadBtn(false)}
+            />
+          )}
+
           {/* <Button Btntext="Add User" onClick={() => setIsOpen(true)} /> */}
 
-          <button onClick={() => setIsOpen(true)} className="px-4 py-2 mb-4 bg-black text-white rounded-lg">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="px-4 py-3 mb-4 bg-black text-sm text-white rounded-lg"
+          >
             Add New user
           </button>
 

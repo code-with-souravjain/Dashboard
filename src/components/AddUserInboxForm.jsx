@@ -99,7 +99,7 @@ const AddUserInboxForm = ({ onClose }) => {
 
       <form
         onSubmit={handleSubmit}
-        className=" md:py-5 grid grid-cols-1 md:grid-cols-2 gap-5  overflow-y-auto"
+        className=" md:py-3 grid grid-cols-1 md:grid-cols-2 gap-5  overflow-y-auto"
       >
         {/* Username */}
         <InputFields
